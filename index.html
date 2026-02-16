@@ -109,7 +109,7 @@
 
         .tabs {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 4px;
             background: var(--bg-secondary);
             border-radius: 16px;
@@ -671,14 +671,12 @@
             <button class="tab active" data-tab="results">Résultats</button>
             <button class="tab" data-tab="ranking">Classement</button>
             <button class="tab" data-tab="history">Historique</button>
-            <button class="tab" data-tab="pronostics">Pronos</button>
             <button class="tab" data-tab="patchnotes">Patch</button>
         </div>
 
         <div id="results-section" class="section active"></div>
         <div id="ranking-section" class="section"></div>
         <div id="history-section" class="section"></div>
-        <div id="pronostics-section" class="section"></div>
         <div id="patchnotes-section" class="section"></div>
         <div id="settings-section" class="section"></div>
 
@@ -689,18 +687,19 @@
         // Données et configuration
         let lflData = { matches: [], standings: [] };
         
-    const TEAM_LOGOS = {
-    "KC": "logos/kc.png",
-    "VIT": "logos/vit.png",
-    "GM": "logos/GM.png",
-    "SLY": "logos/sly.png",
-    "BK": "logos/bk.png",
-    "GO": "logos/go.png",
-    "BDS": "logos/BDS.png",
-    "IJC": "logos/ijp.png",
-    "JL": "logos/jl.png",
-    "GW": "logos/GW.png"
-};
+        // URLs des logos des équipes (Wikia)
+        const TEAM_LOGOS = {
+            "KC": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/60/Karmine_Corplogo_square.png",
+            "VIT": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/e/e8/Team_Vitalitylogo_square.png",
+            "GM": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/f/f0/Gentle_Mateslogo_square.png",
+            "SLY": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/0/0f/Solarylogo_square.png",
+            "BK": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8c/BK_ROGlogo_square.png",
+            "GO": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/d/d4/Team_GOlogo_square.png",
+            "BDS": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/a/a1/Team_BDSlogo_square.png",
+            "IJC": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/69/Ici_Japon_Corplogo_square.png",
+            "JL": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/a/a3/JobLifelogo_square.png",
+            "GW": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/4/46/GameWardlogo_square.png"
+        };
         
         let settings = {
             theme: localStorage.getItem('lfl-theme') || 'blue',
@@ -726,53 +725,6 @@
             ]
         };
 
-        const mockPronostics = [
-            {
-                date: 'Samedi 17 Fév - 18:00',
-                team1: 'KC',
-                team2: 'BDS',
-                prediction: 'KC',
-                probability: 75,
-                confidence: 'high',
-                reason: 'KC en excellente forme',
-                details: {
-                    formKC: 'KC sur une série de 5 victoires avec 25 kills/game',
-                    formBDS: 'BDS lutte avec des performances inconstantes',
-                    h2h: 'KC a gagné les 4 derniers matchs 2-0',
-                    keyFactors: ['Forme KC exceptionnelle', 'Jungle difference', 'BDS en reconstruction']
-                }
-            },
-            {
-                date: 'Samedi 17 Fév - 20:00',
-                team1: 'VIT',
-                team2: 'SLY',
-                prediction: 'VIT',
-                probability: 65,
-                confidence: 'medium',
-                reason: 'VIT légèrement favori',
-                details: {
-                    formVIT: 'Bonne macro-game, midlaner en forme',
-                    formSLY: 'Comebacks impressionnants, teamfight redoutable',
-                    h2h: 'Historique 3-3, matchs serrés',
-                    keyFactors: ['Match équilibré', 'Draft déterminant', 'Peut basculer']
-                }
-            },
-            {
-                date: 'Dimanche 18 Fév - 18:00',
-                team1: 'GM',
-                team2: 'BK',
-                prediction: 'GM',
-                probability: 70,
-                confidence: 'high',
-                reason: 'GM domine les H2H (3-1)',
-                details: {
-                    formGM: 'Botlane dévastatrice, vision control top',
-                    formBK: 'Peine à trouver le rythme, erreurs individuelles',
-                    h2h: 'GM a gagné 3/4 derniers matchs',
-                    keyFactors: ['Synergie GM supérieure', 'BK manque cohésion', 'Avantage mental GM']
-                }
-            }
-        ];
 
         // Charger données
         async function loadLFLData() {
@@ -902,70 +854,6 @@
             container.innerHTML = filtersHtml + historyHtml;
         }
 
-        function renderPronostics() {
-            const container = document.getElementById('pronostics-section');
-            container.innerHTML = mockPronostics.map((prono, index) => `
-                <div class="prono-card" data-prono-index="${index}">
-                    <div class="match-date">${prono.date}</div>
-                    <div class="match-teams">
-                        <div class="team ${prono.prediction === prono.team1 ? 'prono-winner' : ''}">
-                            <div class="team-name">${prono.team1}</div>
-                        </div>
-                        <div class="versus">VS</div>
-                        <div class="team ${prono.prediction === prono.team2 ? 'prono-winner' : ''}">
-                            <div class="team-name">${prono.team2}</div>
-                        </div>
-                    </div>
-                    <div class="prediction-bar">
-                        <div class="prediction-fill" style="width: ${prono.prediction === prono.team1 ? prono.probability : 100 - prono.probability}%"></div>
-                    </div>
-                    <div class="prediction-text">
-                        <span>${prono.prediction === prono.team1 ? prono.probability : 100 - prono.probability}% ${prono.team1}</span>
-                        <span>${prono.team2} ${prono.prediction === prono.team2 ? prono.probability : 100 - prono.probability}%</span>
-                    </div>
-                    <div style="margin-top: 12px; font-size: 12px; color: var(--text-secondary);">
-                        ${prono.reason}
-                    </div>
-                    <span class="confidence confidence-${prono.confidence}">
-                        ${prono.confidence === 'high' ? 'Confiance élevée' : 'Confiance moyenne'}
-                    </span>
-                    <div class="prono-details" id="prono-details-${index}">
-                        <div class="detail-section">
-                            <div class="detail-title">📊 Forme de ${prono.team1}</div>
-                            <div class="detail-text">${prono.details['form' + prono.team1]}</div>
-                        </div>
-                        <div class="detail-section">
-                            <div class="detail-title">📊 Forme de ${prono.team2}</div>
-                            <div class="detail-text">${prono.details['form' + prono.team2]}</div>
-                        </div>
-                        <div class="detail-section">
-                            <div class="detail-title">⚔️ Historique H2H</div>
-                            <div class="detail-text">${prono.details.h2h}</div>
-                        </div>
-                        <div class="detail-section">
-                            <div class="detail-title">🔑 Facteurs clés</div>
-                            ${prono.details.keyFactors.map(f => `<div class="detail-text">• ${f}</div>`).join('')}
-                        </div>
-                    </div>
-                    <div class="expand-indicator">Cliquez pour voir les détails ▼</div>
-                </div>
-            `).join('');
-
-            // Ajouter les event listeners
-            document.querySelectorAll('.prono-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const index = this.dataset.pronoIndex;
-                    const details = document.getElementById(`prono-details-${index}`);
-                    if (details) {
-                        details.classList.toggle('expanded');
-                        const indicator = this.querySelector('.expand-indicator');
-                        indicator.textContent = details.classList.contains('expanded') 
-                            ? 'Cliquez pour masquer ▲' 
-                            : 'Cliquez pour voir les détails ▼';
-                    }
-                });
-            });
-        }
 
         function renderPatchnotes() {
             const container = document.getElementById('patchnotes-section');
@@ -1067,7 +955,6 @@
                 document.getElementById(`${tabName}-section`).classList.add('active');
                 
                 if (tabName === 'history') renderHistory();
-                if (tabName === 'pronostics') renderPronostics();
                 if (tabName === 'patchnotes') renderPatchnotes();
             });
         });
