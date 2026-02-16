@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-02-16T22:00:00Z",
+  "last_update": "2026-02-16T22:30:00Z",
   "matches": [
     {
       "team1": {"name": "Karmine Corp", "short": "KC", "score": 2},
@@ -12,6 +12,54 @@
       "team2": {"name": "Gentle Mates", "short": "GM", "score": 2},
       "date": "16 Fév - 20:00",
       "status": "finished"
+    },
+    {
+      "team1": {"name": "BK ROG", "short": "BK", "score": 1},
+      "team2": {"name": "Team GO", "short": "GO", "score": 2},
+      "date": "16 Fév - 21:30",
+      "status": "finished"
+    },
+    {
+      "team1": {"name": "BDS Academy", "short": "BDS", "score": 2},
+      "team2": {"name": "Ici Japon Corp", "short": "IJC", "score": 1},
+      "date": "15 Fév - 18:00",
+      "status": "finished"
+    },
+    {
+      "team1": {"name": "JobLife", "short": "JL", "score": 0},
+      "team2": {"name": "GameWard", "short": "GW", "score": 2},
+      "date": "15 Fév - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {"name": "Karmine Corp", "short": "KC", "score": 2},
+      "team2": {"name": "Gentle Mates", "short": "GM", "score": 1},
+      "date": "14 Fév - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {"name": "Vitality.Bee", "short": "VIT", "score": 2},
+      "team2": {"name": "Solary", "short": "SLY", "score": 0},
+      "date": "14 Fév - 21:00",
+      "status": "finished"
+    },
+    {
+      "team1": {"name": "BK ROG", "short": "BK", "score": 0},
+      "team2": {"name": "BDS Academy", "short": "BDS", "score": 0},
+      "date": "17 Fév - 18:00",
+      "status": "scheduled"
+    },
+    {
+      "team1": {"name": "Team GO", "short": "GO", "score": 0},
+      "team2": {"name": "Ici Japon Corp", "short": "IJC", "score": 0},
+      "date": "17 Fév - 20:00",
+      "status": "scheduled"
+    },
+    {
+      "team1": {"name": "Karmine Corp", "short": "KC", "score": 0},
+      "team2": {"name": "Vitality.Bee", "short": "VIT", "score": 0},
+      "date": "18 Fév - 18:00",
+      "status": "scheduled"
     }
   ],
   "standings": [
