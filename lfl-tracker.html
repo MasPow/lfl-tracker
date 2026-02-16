@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0A1628">
+    <title>LFL Tracker</title>
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiTEZMIFRyYWNrZXIiLCJzaG9ydF9uYW1lIjoiTEZMIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBBMTYyOCIsInRoZW1lX2NvbG9yIjoiIzBBMTYyOCIsImlucHV0cIjoxLCJzdGFydF91cmwiOiIvIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIWnBaWGRDYjNnOUlqQWdNQ0F4TWpnZ01USTRJRD4rUEhKbFkzUWdlRDBpTUNJZ2VUMGlNQ0lnZDJsa2RHZzlJakV5T0NJZ2FHVnBaMmgwUFNJeE1qZ2lJR1pwYkd3OUlpTXdRVEUyTWpnaUx6NDhjR0YwYUNCa1BTSk5OalFnTkRac01DQXpNbWd3YkRBdE16SkJNVFlnTVRZZ01DQXhJREVnTkRnZ01UWm9NekpCTVRZZ01UWWdNQ0F4SURFdE5EZ2dNVFp6TFRFMkxURXpMalV5TFRFMkxURTJXaUlnWm1sc2JEMGlJekF3UlRaR1JpSXZQand2YzNablBnPT0iLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCIsInNpemVzIjoiNTEyeDUxMiJ9XX0=">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-primary: #0A1628;
+            --bg-secondary: #0F1F3A;
+            --bg-card: #152847;
+            --accent-blue: #00E6FF;
+            --accent-blue-dim: #0099B3;
+            --text-primary: #FFFFFF;
+            --text-secondary: #8FA3BF;
+            --text-dim: #5A6B85;
+            --win: #00FF88;
+            --loss: #FF3366;
+            --glow: 0 0 20px rgba(0, 230, 255, 0.3);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #0D1B35 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 230, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 102, 255, 0.08) 0%, transparent 50%);
+            animation: drift 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-5%, -5%) rotate(2deg); }
+        }
+
+        #app {
+            position: relative;
+            z-index: 1;
+            max-width: 428px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0 30px;
+            position: relative;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0066FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            text-shadow: var(--glow);
+            animation: pulse 3s ease-in-out infinite;
+            margin-bottom: 8px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .subtitle {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            padding: 6px;
+            margin-bottom: 24px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0088CC 100%);
+            color: var(--bg-primary);
+            box-shadow: 0 4px 12px rgba(0, 230, 255, 0.4);
+        }
+
+        .tab:active {
+            transform: scale(0.96);
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .match-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(21, 40, 71, 0.8) 100%);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 230, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .match-card:hover {
+            border-color: rgba(0, 230, 255, 0.3);
+            box-shadow: 0 8px 24px rgba(0, 230, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .match-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .match-card:hover::before {
+            opacity: 1;
+        }
+
+        .match-date {
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .match-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .team {
+            flex: 1;
+            text-align: center;
+        }
+
+        .team-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .team-score {
+            font-size: 32px;
+            font-weight: 900;
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #FFFFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .versus {
+            font-size: 12px;
+            color: var(--text-dim);
+            font-weight: 700;
+            padding: 0 16px;
+        }
+
+        .match-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-live {
+            background: linear-gradient(135deg, #FF3366 0%, #FF6B99 100%);
+            color: white;
+            animation: livePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes livePulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .status-finished {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+        }
+
+        .ranking-table {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(21, 40, 71, 0.8) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 230, 255, 0.1);
+        }
+
+        .ranking-header {
+            display: grid;
+            grid-template-columns: 50px 1fr 80px 80px 80px;
+            gap: 12px;
+            padding: 16px 20px;
+            background: rgba(0, 230, 255, 0.1);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ranking-row {
+            display: grid;
+            grid-template-columns: 50px 1fr 80px 80px 80px;
+            gap: 12px;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .ranking-row:hover {
+            background: rgba(0, 230, 255, 0.05);
+        }
+
+        .ranking-row:last-child {
+            border-bottom: none;
+        }
+
+        .rank {
+            font-size: 20px;
+            font-weight: 900;
+            font-family: 'Orbitron', monospace;
+            color: var(--accent-blue);
+            text-align: center;
+        }
+
+        .rank-1 { color: #FFD700; }
+        .rank-2 { color: #C0C0C0; }
+        .rank-3 { color: #CD7F32; }
+
+        .team-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .team-logo {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0066FF 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 14px;
+            color: white;
+        }
+
+        .team-full-name {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .stat {
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .stat-highlight {
+            color: var(--win);
+            font-weight: 700;
+        }
+
+        .refresh-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0088CC 100%);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0, 230, 255, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .refresh-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 12px 32px rgba(0, 230, 255, 0.6);
+        }
+
+        .refresh-btn:active {
+            transform: scale(0.95) rotate(180deg);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid rgba(0, 230, 255, 0.2);
+            border-top-color: var(--accent-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 380px) {
+            .ranking-header, .ranking-row {
+                grid-template-columns: 40px 1fr 60px 60px 60px;
+                gap: 8px;
+                padding: 12px 16px;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+            <div class="logo">LFL</div>
+            <div class="subtitle">Ligue Française</div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('results')">Résultats</button>
+            <button class="tab" onclick="switchTab('ranking')">Classement</button>
+        </div>
+
+        <div id="results-section" class="section active">
+            <!-- Les résultats seront injectés ici -->
+        </div>
+
+        <div id="ranking-section" class="section">
+            <!-- Le classement sera injecté ici -->
+        </div>
+
+        <button class="refresh-btn" onclick="refreshData()" title="Actualiser">↻</button>
+    </div>
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <script>
+        // Données de démo - À remplacer par une vraie API
+        const mockMatches = [
+            {
+                id: 1,
+                team1: { name: 'Karmine Corp', short: 'KC', score: 2 },
+                team2: { name: 'Vitality.Bee', short: 'VIT', score: 1 },
+                date: 'Aujourd\'hui - 18:00',
+                status: 'finished'
+            },
+            {
+                id: 2,
+                team1: { name: 'Solary', short: 'SLY', score: 0 },
+                team2: { name: 'Gentle Mates', short: 'GM', score: 2 },
+                date: 'Aujourd\'hui - 20:00',
+                status: 'finished'
+            },
+            {
+                id: 3,
+                team1: { name: 'BK ROG', short: 'BK', score: 1 },
+                team2: { name: 'Team GO', short: 'GO', score: 1 },
+                date: 'En cours',
+                status: 'live'
+            },
+            {
+                id: 4,
+                team1: { name: 'BDS Academy', short: 'BDS', score: 0 },
+                team2: { name: 'Ici Japon Corp', short: 'IJC', score: 0 },
+                date: 'Demain - 18:00',
+                status: 'scheduled'
+            }
+        ];
+
+        const mockRanking = [
+            { rank: 1, team: 'Karmine Corp', short: 'KC', wins: 12, losses: 2, points: 36 },
+            { rank: 2, team: 'Gentle Mates', short: 'GM', wins: 10, losses: 4, points: 30 },
+            { rank: 3, team: 'Vitality.Bee', short: 'VIT', wins: 9, losses: 5, points: 27 },
+            { rank: 4, team: 'BK ROG', short: 'BK', wins: 8, losses: 6, points: 24 },
+            { rank: 5, team: 'Solary', short: 'SLY', wins: 7, losses: 7, points: 21 },
+            { rank: 6, team: 'Team GO', short: 'GO', wins: 6, losses: 8, points: 18 },
+            { rank: 7, team: 'BDS Academy', short: 'BDS', wins: 5, losses: 9, points: 15 },
+            { rank: 8, team: 'Ici Japon Corp', short: 'IJC', wins: 4, losses: 10, points: 12 },
+            { rank: 9, team: 'JobLife', short: 'JL', wins: 3, losses: 11, points: 9 },
+            { rank: 10, team: 'GameWard', short: 'GW', wins: 2, losses: 12, points: 6 }
+        ];
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(`${tab}-section`).classList.add('active');
+        }
+
+        function renderMatches() {
+            const container = document.getElementById('results-section');
+            container.innerHTML = mockMatches.map(match => `
+                <div class="match-card">
+                    <div class="match-date">${match.date}</div>
+                    <div class="match-teams">
+                        <div class="team">
+                            <div class="team-name">${match.team1.short}</div>
+                            <div class="team-score">${match.team1.score}</div>
+                        </div>
+                        <div class="versus">VS</div>
+                        <div class="team">
+                            <div class="team-name">${match.team2.short}</div>
+                            <div class="team-score">${match.team2.score}</div>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <span class="match-status ${match.status === 'live' ? 'status-live' : 'status-finished'}">
+                            ${match.status === 'live' ? '● EN DIRECT' : match.status === 'finished' ? 'Terminé' : 'À venir'}
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderRanking() {
+            const container = document.getElementById('ranking-section');
+            container.innerHTML = `
+                <div class="ranking-table">
+                    <div class="ranking-header">
+                        <div>#</div>
+                        <div>Équipe</div>
+                        <div>V-D</div>
+                        <div>%</div>
+                        <div>Pts</div>
+                    </div>
+                    ${mockRanking.map(team => {
+                        const winRate = ((team.wins / (team.wins + team.losses)) * 100).toFixed(0);
+                        return `
+                            <div class="ranking-row">
+                                <div class="rank rank-${team.rank}">${team.rank}</div>
+                                <div class="team-info">
+                                    <div class="team-logo">${team.short[0]}</div>
+                                    <div class="team-full-name">${team.team}</div>
+                                </div>
+                                <div class="stat">${team.wins}-${team.losses}</div>
+                                <div class="stat stat-highlight">${winRate}%</div>
+                                <div class="stat">${team.points}</div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        function refreshData() {
+            const btn = document.querySelector('.refresh-btn');
+            btn.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                btn.style.transform = '';
+                renderMatches();
+                renderRanking();
+            }, 600);
+        }
+
+        // Initialisation
+        renderMatches();
+        renderRanking();
+
+        // Auto-refresh toutes les 30 secondes pour les matchs en direct
+        setInterval(() => {
+            const hasLiveMatch = mockMatches.some(m => m.status === 'live');
+            if (hasLiveMatch) {
+                renderMatches();
+            }
+        }, 30000);
+    </script>
+</body>
+</html>
