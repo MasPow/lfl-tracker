@@ -2,13 +2,14 @@ name: Update LFL Data
 
 on:
   schedule:
-    # Exécuter toutes les 15 minutes pendant les jours de match
     - cron: '*/15 * * * *'
-  workflow_dispatch: # Permet de lancer manuellement
+  workflow_dispatch:
 
 jobs:
   update-data:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write    # ← CETTE LIGNE MANQUAIT !
     
     steps:
       - name: Checkout repository
