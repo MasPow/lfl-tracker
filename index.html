@@ -9,7 +9,7 @@
     <title>LFL Tracker</title>
     <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiTEZMIFRyYWNrZXIiLCJzaG9ydF9uYW1lIjoiTEZMIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiIzBBMTYyOCIsInRoZW1lX2NvbG9yIjoiIzBBMTYyOCIsImlucHV0cIjoxLCJzdGFydF91cmwiOiIvIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIWnBaWGRDYjNnOUlqQWdNQ0F4TWpnZ01USTRJRD4rUEhKbFkzUWdlRDBpTUNJZ2VUMGlNQ0lnZDJsa2RHZzlJakV5T0NJZ2FHVnBaMmgwUFNJeE1qZ2lJR1pwYkd3OUlpTXdRVEUyTWpnaUx6NDhjR0YwYUNCa1BTSk5OalFnTkRac01DQXpNbWd3YkRBdE16SkJNVFlnTVRZZ01DQXhJREVnTkRnZ01UWm9NekpCTVRZZ01UWWdNQ0F4SURFdE5EZ2dNVFp6TFRFMkxURXpMalV5TFRFMkxURTJXaUlnWm1sc2JEMGlJekF3UlRaR1JpSXZQand2YzNablBnPT0iLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCIsInNpemVzIjoiNTEyeDUxMiJ9XX0=">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700;800&display=swap');
         
         * {
             margin: 0;
@@ -32,13 +32,31 @@
             --glow: 0 0 20px rgba(0, 230, 255, 0.3);
         }
 
+        /* Thème noir */
+        body.theme-dark {
+            --bg-primary: #000000;
+            --bg-secondary: #0A0A0A;
+            --bg-card: #1A1A1A;
+        }
+
+        /* Thème blanc */
+        body.theme-light {
+            --bg-primary: #F5F5F7;
+            --bg-secondary: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --text-primary: #1D1D1F;
+            --text-secondary: #6E6E73;
+            --text-dim: #86868B;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary) 0%, #0D1B35 100%);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
             padding-bottom: 80px;
+            transition: all 0.3s ease;
         }
 
         body::before {
@@ -54,6 +72,16 @@
             animation: drift 20s ease-in-out infinite;
             pointer-events: none;
             z-index: 0;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        body.theme-light::before {
+            opacity: 0.3;
+        }
+
+        body.theme-dark::before {
+            opacity: 0.5;
         }
 
         @keyframes drift {
@@ -71,8 +99,32 @@
 
         .header {
             text-align: center;
-            padding: 40px 0 30px;
+            padding: 40px 0 20px;
             position: relative;
+        }
+
+        .settings-btn {
+            position: absolute;
+            top: 40px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 230, 255, 0.2);
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .settings-btn:hover {
+            background: var(--accent-blue);
+            color: var(--bg-primary);
+            transform: rotate(90deg);
         }
 
         .logo {
@@ -111,6 +163,10 @@
             padding: 6px;
             margin-bottom: 24px;
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        body.theme-light .tabs {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .tab {
@@ -158,7 +214,7 @@
         }
 
         .match-card {
-            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(21, 40, 71, 0.8) 100%);
+            background: var(--bg-card);
             border-radius: 20px;
             padding: 20px;
             margin-bottom: 16px;
@@ -166,6 +222,11 @@
             overflow: hidden;
             border: 1px solid rgba(0, 230, 255, 0.1);
             transition: all 0.3s ease;
+        }
+
+        body.theme-light .match-card {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.06);
         }
 
         .match-card:hover {
@@ -273,33 +334,46 @@
         }
 
         .ranking-table {
-            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(21, 40, 71, 0.8) 100%);
+            background: var(--bg-card);
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(0, 230, 255, 0.1);
         }
 
+        body.theme-light .ranking-table {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
         .ranking-header {
             display: grid;
-            grid-template-columns: 40px 1fr 80px 80px;
-            gap: 10px;
-            padding: 14px 16px;
+            grid-template-columns: 45px 1fr 70px 70px;
+            gap: 12px;
+            padding: 16px;
             background: rgba(0, 230, 255, 0.1);
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--accent-blue);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
+        body.theme-light .ranking-header {
+            background: rgba(0, 230, 255, 0.05);
+        }
+
         .ranking-row {
             display: grid;
-            grid-template-columns: 40px 1fr 80px 80px;
-            gap: 10px;
-            padding: 14px 16px;
+            grid-template-columns: 45px 1fr 70px 70px;
+            gap: 12px;
+            padding: 16px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             align-items: center;
             transition: background 0.3s ease;
+        }
+
+        body.theme-light .ranking-row {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .ranking-row:hover {
@@ -311,7 +385,7 @@
         }
 
         .rank {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
             font-family: 'Orbitron', monospace;
             color: var(--accent-blue);
@@ -325,19 +399,19 @@
         .team-info {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .team-logo {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             background: linear-gradient(135deg, var(--accent-blue) 0%, #0066FF 100%);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 12px;
+            font-size: 14px;
             color: white;
             flex-shrink: 0;
         }
@@ -345,13 +419,13 @@
         .team-full-name {
             font-weight: 600;
             color: var(--text-primary);
-            font-size: 13px;
-            line-height: 1.2;
+            font-size: 14px;
+            line-height: 1.3;
         }
 
         .stat {
             text-align: center;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             color: var(--text-secondary);
         }
@@ -408,12 +482,16 @@
         }
 
         .history-card {
-            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(21, 40, 71, 0.8) 100%);
+            background: var(--bg-card);
             border-radius: 16px;
             padding: 16px;
             margin-bottom: 12px;
             border: 1px solid rgba(0, 230, 255, 0.1);
             transition: all 0.3s ease;
+        }
+
+        body.theme-light .history-card {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
         .history-card:hover {
@@ -465,13 +543,24 @@
         }
 
         .prono-card {
-            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(21, 40, 71, 0.8) 100%);
+            background: var(--bg-card);
             border-radius: 20px;
             padding: 20px;
             margin-bottom: 16px;
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(0, 230, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        body.theme-light .prono-card {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .prono-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 230, 255, 0.15);
         }
 
         .prono-card::after {
@@ -541,6 +630,321 @@
             color: var(--accent-blue);
         }
 
+        .prono-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 0;
+        }
+
+        .prono-details.expanded {
+            max-height: 500px;
+            margin-top: 16px;
+        }
+
+        .detail-section {
+            background: rgba(0, 230, 255, 0.05);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        body.theme-light .detail-section {
+            background: rgba(0, 230, 255, 0.03);
+        }
+
+        .detail-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .detail-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .detail-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .detail-stat:last-child {
+            border-bottom: none;
+        }
+
+        .expand-indicator {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 11px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        /* PATCHNOTES */
+        .patchnote-hero {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0066FF 100%);
+            border-radius: 24px;
+            padding: 32px 24px;
+            margin-bottom: 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .patchnote-hero::before {
+            content: '✨';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            opacity: 0.3;
+        }
+
+        .patchnote-version {
+            font-family: 'Orbitron', monospace;
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--bg-primary);
+            margin-bottom: 8px;
+        }
+
+        .patchnote-date {
+            font-size: 14px;
+            color: rgba(10, 22, 40, 0.7);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .update-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(0, 230, 255, 0.1);
+        }
+
+        body.theme-light .update-card {
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .update-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .tag-new {
+            background: linear-gradient(135deg, var(--win) 0%, #00CC6F 100%);
+            color: white;
+        }
+
+        .tag-improved {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0088CC 100%);
+            color: white;
+        }
+
+        .tag-fixed {
+            background: linear-gradient(135deg, #FFA500 0%, #FF8C00 100%);
+            color: white;
+        }
+
+        .update-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .update-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .update-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .update-features li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .update-features li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+
+        /* SETTINGS */
+        .settings-section {
+            margin-bottom: 32px;
+        }
+
+        .settings-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .settings-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(0, 230, 255, 0.1);
+        }
+
+        body.theme-light .settings-card {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        body.theme-light .setting-item {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-info {
+            flex: 1;
+        }
+
+        .setting-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .setting-sublabel {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        .theme-selector {
+            display: flex;
+            gap: 8px;
+        }
+
+        .theme-option {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .theme-option.active {
+            border-color: var(--accent-blue);
+            transform: scale(1.1);
+        }
+
+        .theme-option::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .theme-option.active::after {
+            opacity: 1;
+        }
+
+        .theme-blue {
+            background: linear-gradient(135deg, #0A1628 0%, #0066FF 100%);
+        }
+
+        .theme-dark {
+            background: linear-gradient(135deg, #000000 0%, #1A1A1A 100%);
+        }
+
+        .theme-light-opt {
+            background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F7 100%);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            width: 52px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--accent-blue);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(24px);
+        }
+
+        .notif-warning {
+            background: rgba(255, 163, 0, 0.1);
+            border: 1px solid rgba(255, 163, 0, 0.3);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #FFA500;
+            line-height: 1.5;
+        }
+
         .refresh-btn {
             position: fixed;
             bottom: 20px;
@@ -580,12 +984,19 @@
             .stat {
                 font-size: 13px;
             }
+
+            .ranking-header, .ranking-row {
+                grid-template-columns: 40px 1fr 65px 65px;
+                gap: 8px;
+                padding: 12px;
+            }
         }
     </style>
 </head>
 <body>
     <div id="app">
         <div class="header">
+            <button class="settings-btn" onclick="switchTab('settings')">⚙️</button>
             <div class="logo">LFL</div>
             <div class="subtitle">Ligue Française</div>
         </div>
@@ -601,11 +1012,13 @@
         <div id="ranking-section" class="section"></div>
         <div id="history-section" class="section"></div>
         <div id="pronostics-section" class="section"></div>
+        <div id="settings-section" class="section"></div>
 
         <button class="refresh-btn" onclick="refreshData()" title="Actualiser">↻</button>
     </div>
 
     <script>
+        // Configuration et données
         const mockMatches = [
             {
                 id: 1,
@@ -703,7 +1116,13 @@
                 prediction: 'KC',
                 probability: 75,
                 confidence: 'high',
-                reason: 'KC en excellente forme, 5 victoires consécutives'
+                reason: 'KC en excellente forme, 5 victoires consécutives',
+                details: {
+                    formKC: 'KC est sur une série de 5 victoires d\'affilée avec une moyenne de 25 kills par game. Leur botlane domine actuellement la LFL.',
+                    formBDS: 'BDS lutte en milieu de tableau avec des performances inconstantes. Leur early game est souvent passif.',
+                    h2h: 'KC a remporté les 4 dernières confrontations contre BDS avec une moyenne de 2-0.',
+                    keyFactors: ['Forme actuelle de KC exceptionnelle', 'Jungle difference attendue', 'BDS en phase de reconstruction']
+                }
             },
             {
                 date: 'Samedi 17 Fév - 20:00',
@@ -712,7 +1131,13 @@
                 prediction: 'VIT',
                 probability: 65,
                 confidence: 'medium',
-                reason: 'VIT légèrement favori, match serré attendu'
+                reason: 'VIT légèrement favori, match serré attendu',
+                details: {
+                    formVIT: 'Vitality.Bee affiche un jeu solide avec une bonne macro-game et peu d\'erreurs. Leur midlaner est en forme.',
+                    formSLY: 'Solary montre des signes de résilience avec des comebacks impressionnants. Leur teamfight est redoutable.',
+                    h2h: 'Historique équilibré : 3-3 sur les 6 derniers matchs. Tous les games ont été serrés.',
+                    keyFactors: ['Match très équilibré', 'Draft sera déterminant', 'Peut basculer sur un teamfight']
+                }
             },
             {
                 date: 'Dimanche 18 Fév - 18:00',
@@ -721,7 +1146,13 @@
                 prediction: 'GM',
                 probability: 70,
                 confidence: 'high',
-                reason: 'GM domine les confrontations directes (3-1)'
+                reason: 'GM domine les confrontations directes (3-1)',
+                details: {
+                    formGM: 'Gentle Mates revient en force avec une botlane qui fait des ravages. Leur vision control est top tier.',
+                    formBK: 'BK ROG peine à trouver son rythme. Beaucoup d\'erreurs individuelles ces dernières semaines.',
+                    h2h: 'GM a gagné 3 des 4 derniers matchs, souvent de manière dominante avec des scores nets.',
+                    keyFactors: ['Synergie GM bien supérieure', 'BK manque de cohésion', 'Avantage psychologique GM']
+                }
             },
             {
                 date: 'Dimanche 18 Fév - 20:00',
@@ -730,7 +1161,13 @@
                 prediction: 'GO',
                 probability: 60,
                 confidence: 'medium',
-                reason: 'Forme récente de GO en amélioration'
+                reason: 'Forme récente de GO en amélioration',
+                details: {
+                    formGO: 'Team GO montre de belles choses avec un nouveau coach. Leur agressivité en early paie.',
+                    formIJC: 'Ici Japon Corp reste imprévisible. Capable du meilleur comme du pire selon les jours.',
+                    h2h: 'Récemment équilibré mais GO semble avoir trouvé la formule contre le style de IJC.',
+                    keyFactors: ['GO plus consistant', 'IJC trop aléatoire', 'Momentum avec GO']
+                }
             },
             {
                 date: 'Lundi 19 Fév - 19:00',
@@ -739,22 +1176,52 @@
                 prediction: 'JL',
                 probability: 55,
                 confidence: 'medium',
-                reason: 'Match équilibré entre deux équipes en bas de tableau'
+                reason: 'Match équilibré entre deux équipes en bas de tableau',
+                details: {
+                    formJL: 'JobLife cherche sa place avec de jeunes talents prometteurs mais inexpérimentés.',
+                    formGW: 'GameWard en difficulté cette split, manque de synergies et beaucoup de changements de roster.',
+                    h2h: 'Peu de données, mais JL semble avoir un leger edge mental sur ce matchup.',
+                    keyFactors: ['Match crucial pour le bas de tableau', 'Pression égale sur les deux teams', 'Petite faveur à JL']
+                }
             }
         ];
 
         let currentFilter = 'all';
         const allTeams = ['KC', 'VIT', 'SLY', 'GM', 'BK', 'GO', 'BDS', 'IJC', 'JL', 'GW'];
 
+        // Settings avec localStorage
+        let settings = {
+            theme: localStorage.getItem('lfl-theme') || 'blue',
+            notifications: localStorage.getItem('lfl-notifications') === 'true'
+        };
+
+        // Appliquer le thème au chargement
+        function applyTheme(theme) {
+            document.body.className = '';
+            if (theme === 'dark') {
+                document.body.classList.add('theme-dark');
+            } else if (theme === 'light') {
+                document.body.classList.add('theme-light');
+            }
+            settings.theme = theme;
+            localStorage.setItem('lfl-theme', theme);
+        }
+
+        // Appliquer au chargement
+        applyTheme(settings.theme);
+
         function switchTab(tab) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
             document.getElementById(`${tab}-section`).classList.add('active');
 
             if (tab === 'history') renderHistory();
             if (tab === 'pronostics') renderPronostics();
+            if (tab === 'settings') renderSettings();
         }
 
         function renderMatches() {
@@ -861,8 +1328,8 @@
 
         function renderPronostics() {
             const container = document.getElementById('pronostics-section');
-            container.innerHTML = mockPronostics.map(prono => `
-                <div class="prono-card">
+            container.innerHTML = mockPronostics.map((prono, index) => `
+                <div class="prono-card" onclick="togglePronoDetails(${index})">
                     <div class="match-date">${prono.date}</div>
                     <div class="match-teams">
                         <div class="team ${prono.prediction === prono.team1 ? 'prono-winner' : ''}">
@@ -886,8 +1353,140 @@
                     <span class="confidence confidence-${prono.confidence}">
                         ${prono.confidence === 'high' ? 'Confiance élevée' : 'Confiance moyenne'}
                     </span>
+                    
+                    <div class="prono-details" id="prono-details-${index}">
+                        <div class="detail-section">
+                            <div class="detail-title">📊 Forme de ${prono.team1}</div>
+                            <div class="detail-text">${prono.details['form' + prono.team1]}</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-title">📊 Forme de ${prono.team2}</div>
+                            <div class="detail-text">${prono.details['form' + prono.team2]}</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-title">⚔️ Historique H2H</div>
+                            <div class="detail-text">${prono.details.h2h}</div>
+                        </div>
+                        <div class="detail-section">
+                            <div class="detail-title">🔑 Facteurs clés</div>
+                            ${prono.details.keyFactors.map(f => `<div class="detail-text">• ${f}</div>`).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="expand-indicator">Cliquez pour ${document.getElementById('prono-details-' + index)?.classList.contains('expanded') ? 'masquer' : 'voir'} les détails ▼</div>
                 </div>
             `).join('');
+        }
+
+        function togglePronoDetails(index) {
+            const details = document.getElementById(`prono-details-${index}`);
+            if (details) {
+                details.classList.toggle('expanded');
+            }
+            // Re-render pour update le texte
+            setTimeout(() => renderPronostics(), 10);
+        }
+
+        function renderSettings() {
+            const container = document.getElementById('settings-section');
+            container.innerHTML = `
+                <div class="patchnote-hero">
+                    <div class="patchnote-version">v2.0</div>
+                    <div class="patchnote-date">16 Février 2026</div>
+                </div>
+
+                <div class="update-card">
+                    <span class="update-tag tag-new">Nouveau</span>
+                    <div class="update-title">🎨 Système de Thèmes</div>
+                    <div class="update-desc">
+                        Personnalisez l'apparence de l'app avec 3 thèmes : Bleu (défaut), Noir total, et Blanc épuré.
+                    </div>
+                </div>
+
+                <div class="update-card">
+                    <span class="update-tag tag-new">Nouveau</span>
+                    <div class="update-title">🔔 Notifications de Matchs</div>
+                    <div class="update-desc">
+                        Recevez une notification quand un match commence (Android uniquement pour l'instant).
+                    </div>
+                </div>
+
+                <div class="update-card">
+                    <span class="update-tag tag-improved">Amélioré</span>
+                    <div class="update-title">📊 Détails des Pronostics</div>
+                    <div class="update-desc">
+                        Cliquez sur un pronostic pour voir l'analyse complète : forme des équipes, historique H2H, et facteurs clés.
+                    </div>
+                </div>
+
+                <div class="update-card">
+                    <span class="update-tag tag-fixed">Corrigé</span>
+                    <div class="update-title">📱 Alignement du Classement</div>
+                    <div class="update-desc">
+                        Le tableau de classement s'affiche maintenant parfaitement sur tous les écrans, même les plus petits.
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px;">
+                    <div class="settings-section">
+                        <div class="settings-title">⚙️ Paramètres</div>
+                        
+                        <div class="settings-card">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-label">Thème</div>
+                                    <div class="setting-sublabel">Personnalisez l'apparence</div>
+                                </div>
+                                <div class="theme-selector">
+                                    <div class="theme-option theme-blue ${settings.theme === 'blue' ? 'active' : ''}" onclick="changeTheme('blue')"></div>
+                                    <div class="theme-option theme-dark ${settings.theme === 'dark' ? 'active' : ''}" onclick="changeTheme('dark')"></div>
+                                    <div class="theme-option theme-light-opt ${settings.theme === 'light' ? 'active' : ''}" onclick="changeTheme('light')"></div>
+                                </div>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <div class="setting-label">Notifications</div>
+                                    <div class="setting-sublabel">Matchs en direct</div>
+                                </div>
+                                <div class="toggle-switch ${settings.notifications ? 'active' : ''}" onclick="toggleNotifications()">
+                                    <div class="toggle-slider"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="notif-warning">
+                            ⚠️ <strong>iOS:</strong> Les notifications push ne sont pas supportées par Safari. Fonctionne uniquement sur Android pour le moment.
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function changeTheme(theme) {
+            applyTheme(theme);
+            renderSettings();
+        }
+
+        function toggleNotifications() {
+            settings.notifications = !settings.notifications;
+            localStorage.setItem('lfl-notifications', settings.notifications);
+            
+            if (settings.notifications) {
+                // Demander la permission (ne marche que sur Android)
+                if ('Notification' in window && Notification.permission === 'default') {
+                    Notification.requestPermission().then(permission => {
+                        if (permission === 'granted') {
+                            new Notification('LFL Tracker', {
+                                body: 'Notifications activées ! Vous serez prévenu des matchs en direct.',
+                                icon: '/icon.png'
+                            });
+                        }
+                    });
+                }
+            }
+            
+            renderSettings();
         }
 
         function filterHistory(team) {
@@ -905,15 +1504,36 @@
                 const activeSection = document.querySelector('.section.active').id;
                 if (activeSection === 'history-section') renderHistory();
                 if (activeSection === 'pronostics-section') renderPronostics();
+                if (activeSection === 'settings-section') renderSettings();
             }, 600);
         }
 
+        // Simuler notifications pour matchs live (seulement si activé)
+        function checkLiveMatches() {
+            if (settings.notifications && 'Notification' in window && Notification.permission === 'granted') {
+                mockMatches.forEach(match => {
+                    if (match.status === 'live') {
+                        // En vrai tu ferais un check pour voir si déjà notifié
+                        new Notification(`Match en direct !`, {
+                            body: `${match.team1.short} vs ${match.team2.short} - ${match.team1.score}:${match.team2.score}`,
+                            icon: '/icon.png'
+                        });
+                    }
+                });
+            }
+        }
+
+        // Init
         renderMatches();
         renderRanking();
 
+        // Auto-refresh
         setInterval(() => {
             const hasLiveMatch = mockMatches.some(m => m.status === 'live');
-            if (hasLiveMatch) renderMatches();
+            if (hasLiveMatch) {
+                renderMatches();
+                checkLiveMatches();
+            }
         }, 30000);
     </script>
 </body>
