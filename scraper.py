@@ -1,19 +1,23 @@
 #!/usr/bin/env python3
 """
-Scraper LFL avec API LoL Esports publique (pas besoin de clé)
+SCRAPER LFL QUI MARCHE VRAIMENT
+Simple, robuste, avec logs pour débugger
 """
 
 import requests
 import json
 from datetime import datetime
 
-# API publique LoL Esports
-ESPORTS_API = "https://esports-api.lolesports.com/persisted/gw"
-HEADERS = {
-    'x-api-key': '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z'
-}
+print("=" * 50)
+print("🔥 SCRAPER LFL v2.0")
+print("=" * 50)
 
-TEAM_SHORTS = {
+# API LoL Esports publique
+HEADERS = {'x-api-key': '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z'}
+LFL_LEAGUE_ID = '105266103462388553'
+
+# Mapping des noms d'équipes
+TEAMS = {
     "Karmine Corp": "KC",
     "Karmine Corp Blue": "KC",
     "Team Vitality.Bee": "VIT",
@@ -30,136 +34,199 @@ TEAM_SHORTS = {
     "GameWard": "GW"
 }
 
-def get_lfl_data():
-    """Récupère les données LFL"""
+def get_short_name(full_name):
+    """Récupère le nom court d'une équipe"""
+    return TEAMS.get(full_name, full_name[:3].upper())
+
+def fetch_matches():
+    """Récupère les matchs LFL"""
+    print("\n📊 Récupération des matchs...")
     
-    # Récupérer les matchs
-    schedule_url = f"{ESPORTS_API}/getSchedule"
-    params = {'hl': 'fr-FR', 'leagueId': '105266103462388553'}  # LFL
+    url = "https://esports-api.lolesports.com/persisted/gw/getSchedule"
+    params = {'hl': 'fr-FR', 'leagueId': LFL_LEAGUE_ID}
     
     try:
-        response = requests.get(schedule_url, headers=HEADERS, params=params, timeout=15)
-        response.raise_for_status()
-        data = response.json()
+        r = requests.get(url, headers=HEADERS, params=params, timeout=15)
+        r.raise_for_status()
+        data = r.json()
         
         events = data.get('data', {}).get('schedule', {}).get('events', [])
+        print(f"✅ API a retourné {len(events)} événements")
         
         matches = []
         for event in events[:15]:
-            match_obj = event.get('match', {})
-            teams = match_obj.get('teams', [])
-            
-            if len(teams) < 2:
-                continue
-            
-            team1_name = teams[0].get('name', 'TBD')
-            team2_name = teams[1].get('name', 'TBD')
-            
-            team1_result = teams[0].get('result', {})
-            team2_result = teams[1].get('result', {})
-            
-            team1_wins = team1_result.get('gameWins', 0) if team1_result else 0
-            team2_wins = team2_result.get('gameWins', 0) if team2_result else 0
-            
-            state = event.get('state', 'unstarted')
-            start_time = event.get('startTime', '')
-            
-            if state == 'completed':
-                status = 'finished'
-            elif state == 'inProgress':
-                status = 'live'
-            else:
-                status = 'scheduled'
-            
-            # Formater la date
             try:
-                dt = datetime.fromisoformat(start_time.replace('Z', '+00:00'))
-                date_str = dt.strftime('%d %b - %H:%M')
-            except:
-                date_str = 'Date TBD'
-            
-            match = {
-                "team1": {
-                    "name": team1_name,
-                    "short": TEAM_SHORTS.get(team1_name, team1_name[:3].upper()),
-                    "score": team1_wins
-                },
-                "team2": {
-                    "name": team2_name,
-                    "short": TEAM_SHORTS.get(team2_name, team2_name[:3].upper()),
-                    "score": team2_wins
-                },
-                "date": date_str,
-                "status": status
-            }
-            
-            matches.append(match)
+                match_obj = event.get('match', {})
+                if not match_obj:
+                    continue
+                
+                teams = match_obj.get('teams', [])
+                if len(teams) < 2:
+                    continue
+                
+                # Noms des équipes
+                team1_name = teams[0].get('name', 'TBD')
+                team2_name = teams[1].get('name', 'TBD')
+                
+                # Scores
+                team1_result = teams[0].get('result', {}) or {}
+                team2_result = teams[1].get('result', {}) or {}
+                team1_wins = team1_result.get('gameWins', 0) or 0
+                team2_wins = team2_result.get('gameWins', 0) or 0
+                
+                # Statut
+                state = event.get('state', 'unstarted')
+                if state == 'completed':
+                    status = 'finished'
+                elif state == 'inProgress':
+                    status = 'live'
+                else:
+                    status = 'scheduled'
+                
+                # Date
+                start_time = event.get('startTime', '')
+                try:
+                    dt = datetime.fromisoformat(start_time.replace('Z', '+00:00'))
+                    date_str = dt.strftime('%d %b - %H:%M')
+                except:
+                    date_str = 'TBD'
+                
+                match = {
+                    "team1": {
+                        "name": team1_name,
+                        "short": get_short_name(team1_name),
+                        "score": team1_wins
+                    },
+                    "team2": {
+                        "name": team2_name,
+                        "short": get_short_name(team2_name),
+                        "score": team2_wins
+                    },
+                    "date": date_str,
+                    "status": status
+                }
+                
+                matches.append(match)
+                print(f"   ✓ {team1_name} vs {team2_name} ({status})")
+                
+            except Exception as e:
+                print(f"   ⚠️ Erreur parsing match: {e}")
+                continue
         
-        print(f"✅ {len(matches)} matchs récupérés")
+        print(f"\n✅ {len(matches)} matchs valides récupérés")
+        return matches
         
     except Exception as e:
-        print(f"❌ Erreur matchs: {e}")
-        matches = []
+        print(f"❌ Erreur API matchs: {e}")
+        return []
+
+def fetch_standings():
+    """Récupère le classement LFL"""
+    print("\n📊 Récupération du classement...")
     
-    # Récupérer le classement
-    standings_url = f"{ESPORTS_API}/getStandings"
-    standings = []
+    url = "https://esports-api.lolesports.com/persisted/gw/getStandings"
+    params = {'hl': 'fr-FR', 'leagueId': LFL_LEAGUE_ID}
     
     try:
-        response = requests.get(standings_url, headers=HEADERS, params=params, timeout=15)
-        response.raise_for_status()
-        data = response.json()
+        r = requests.get(url, headers=HEADERS, params=params, timeout=15)
+        r.raise_for_status()
+        data = r.json()
         
         stages = data.get('data', {}).get('standings', [])
+        if not stages:
+            print("⚠️ Pas de stages dans la réponse")
+            return []
         
-        if stages:
-            sections = stages[0].get('stages', [{}])[0].get('sections', [])
-            if sections:
-                rankings = sections[0].get('rankings', [])
+        # Prendre le premier stage
+        stage = stages[0].get('stages', [{}])[0]
+        sections = stage.get('sections', [])
+        
+        if not sections:
+            print("⚠️ Pas de sections dans le stage")
+            return []
+        
+        rankings = sections[0].get('rankings', [])
+        print(f"✅ API a retourné {len(rankings)} équipes")
+        
+        standings = []
+        for rank_obj in rankings:
+            try:
+                teams_list = rank_obj.get('teams', [])
+                if not teams_list:
+                    continue
                 
-                for rank_obj in rankings:
-                    teams_list = rank_obj.get('teams', [])
-                    if teams_list:
-                        team_name = teams_list[0].get('name', 'Unknown')
-                        
-                        standing = {
-                            "rank": rank_obj.get('ordinal', 0),
-                            "team": team_name,
-                            "short": TEAM_SHORTS.get(team_name, team_name[:3].upper()),
-                            "wins": rank_obj.get('wins', 0),
-                            "losses": rank_obj.get('losses', 0),
-                            "points": rank_obj.get('wins', 0) * 3
-                        }
-                        standings.append(standing)
+                team_name = teams_list[0].get('name', 'Unknown')
+                wins = rank_obj.get('wins', 0) or 0
+                losses = rank_obj.get('losses', 0) or 0
+                ordinal = rank_obj.get('ordinal', 0) or 0
+                
+                standing = {
+                    "rank": ordinal,
+                    "team": team_name,
+                    "short": get_short_name(team_name),
+                    "wins": wins,
+                    "losses": losses,
+                    "points": wins * 3
+                }
+                
+                standings.append(standing)
+                print(f"   {ordinal}. {team_name} - {wins}V {losses}D")
+                
+            except Exception as e:
+                print(f"   ⚠️ Erreur parsing équipe: {e}")
+                continue
         
-        print(f"✅ {len(standings)} équipes au classement")
+        print(f"\n✅ {len(standings)} équipes valides")
+        return standings
         
     except Exception as e:
-        print(f"❌ Erreur classement: {e}")
-    
-    return matches, standings
+        print(f"❌ Erreur API classement: {e}")
+        return []
 
 def main():
-    print("🔄 Récupération données LFL via API LoL Esports...")
+    """Fonction principale"""
     
-    matches, standings = get_lfl_data()
+    # Récupérer les données
+    matches = fetch_matches()
+    standings = fetch_standings()
     
+    # Créer le fichier JSON
     lfl_data = {
-        'last_update': datetime.utcnow().isoformat() + 'Z',
+        'last_update': datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ'),
         'matches': matches,
         'standings': standings
     }
     
+    # Sauvegarder
     with open('lfl-data.json', 'w', encoding='utf-8') as f:
         json.dump(lfl_data, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ Données sauvegardées")
-    print(f"   - {len(matches)} matchs")
-    print(f"   - {len(standings)} équipes")
+    print("\n" + "=" * 50)
+    print(f"✅ SUCCÈS - Fichier créé !")
+    print(f"   📅 Dernière MAJ: {lfl_data['last_update']}")
+    print(f"   ⚽ Matchs: {len(matches)}")
+    print(f"   🏆 Équipes: {len(standings)}")
+    print("=" * 50)
     
+    # Afficher un aperçu
     if matches:
+        print(f"\n📋 Premier match:")
         m = matches[0]
-        print(f"\nDernier match: {m['team1']['name']} {m['team1']['score']}-{m['team2']['score']} {m['team2']['name']}")
+        print(f"   {m['team1']['name']} {m['team1']['score']}-{m['team2']['score']} {m['team2']['name']}")
+        print(f"   Date: {m['date']} | Status: {m['status']}")
+    
+    if standings:
+        print(f"\n🏆 Top 3:")
+        for s in standings[:3]:
+            print(f"   {s['rank']}. {s['team']} - {s['wins']}V {s['losses']}D ({s['points']} pts)")
+    
+    # Vérifier si c'est vide
+    if not matches and not standings:
+        print("\n⚠️  WARNING: Données vides ! L'API n'a rien retourné.")
+        print("   Vérifier manuellement si la LFL est en cours.")
+        return 1
+    
+    return 0
 
 if __name__ == "__main__":
-    main()
+    exit(main())
