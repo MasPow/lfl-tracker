@@ -1,149 +1,183 @@
 #!/usr/bin/env python3
 """
-Script pour récupérer les données LFL en temps réel
-Source : Leaguepedia via API Cargo
+Scraper LFL avec API Riot Games officielle
+Nécessite une clé API Riot : https://developer.riotgames.com
 """
 
 import requests
 import json
 from datetime import datetime
+import os
 
-# API Cargo de Leaguepedia
-CARGO_API = "https://lol.fandom.com/api.php"
+# Ta clé API Riot (à mettre dans les secrets GitHub)
+RIOT_API_KEY = os.environ.get('RIOT_API_KEY', 'RGAPI-YOUR-KEY-HERE')
 
-def query_cargo(tables, fields, where="", group_by="", order_by="", limit=500):
-    """Effectue une requête Cargo sur Leaguepedia"""
-    params = {
-        "action": "cargoquery",
-        "format": "json",
-        "tables": tables,
-        "fields": fields,
-        "limit": limit
-    }
-    
-    if where:
-        params["where"] = where
-    if group_by:
-        params["group_by"] = group_by
-    if order_by:
-        params["order_by"] = order_by
-    
+# Endpoints API
+ESPORTS_API = "https://esports-api.lolesports.com/persisted/gw"
+LEAGUES_ENDPOINT = f"{ESPORTS_API}/getLeagues?hl=fr-FR"
+SCHEDULE_ENDPOINT = f"{ESPORTS_API}/getSchedule?hl=fr-FR"
+STANDINGS_ENDPOINT = f"{ESPORTS_API}/getStandings?hl=fr-FR"
+
+# Headers pour l'API eSports (pas besoin de clé API pour celle-ci)
+HEADERS = {
+    'x-api-key': '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z',  # Clé publique LoL Esports
+    'Accept': 'application/json'
+}
+
+# Mapping des logos
+TEAM_LOGOS = {
+    "Karmine Corp": "KC",
+    "Vitality.Bee": "VIT",
+    "Solary": "SLY",
+    "Gentle Mates": "GM",
+    "BK ROG": "BK",
+    "Team GO": "GO",
+    "BDS Academy": "BDS",
+    "Ici Japon Corp": "IJC",
+    "JobLife": "JL",
+    "GameWard": "GW"
+}
+
+def get_lfl_league_id():
+    """Récupère l'ID de la LFL"""
     try:
-        response = requests.get(CARGO_API, params=params, timeout=10)
+        response = requests.get(LEAGUES_ENDPOINT, headers=HEADERS, timeout=10)
         response.raise_for_status()
-        return response.json()
+        data = response.json()
+        
+        # Chercher la LFL
+        for league in data.get('data', {}).get('leagues', []):
+            if league.get('slug') == 'lfl':
+                return league.get('id')
+        
+        print("⚠️ LFL non trouvée")
+        return None
     except Exception as e:
-        print(f"Erreur API: {e}")
+        print(f"❌ Erreur récupération league ID: {e}")
         return None
 
-def get_lfl_matches():
+def get_lfl_matches(league_id):
     """Récupère les matchs LFL récents"""
-    
-    # Requête pour les matchs LFL 2025
-    tables = "MatchSchedule=MS, ScoreboardGames=SG"
-    fields = """
-        MS.Team1, MS.Team2, MS.Winner, MS.DateTime_UTC,
-        SG.Team1Score, SG.Team2Score, MS.BestOf, MS.MatchId
-    """
-    where = "MS.OverviewPage='LFL/2025 Season/Spring Split' AND MS.DateTime_UTC IS NOT NULL"
-    order_by = "MS.DateTime_UTC DESC"
-    limit = 50
-    
-    data = query_cargo(tables, fields, where=where, order_by=order_by, limit=limit)
-    
-    if not data or 'cargoquery' not in data:
-        print("Erreur : Impossible de récupérer les matchs")
-        return []
-    
-    matches = []
-    for item in data['cargoquery']:
-        title = item['title']
+    try:
+        url = f"{SCHEDULE_ENDPOINT}&leagueId={league_id}"
+        response = requests.get(url, headers=HEADERS, timeout=10)
+        response.raise_for_status()
+        data = response.json()
         
-        # Parser la date
-        match_date = title.get('DateTime UTC', '')
-        try:
-            dt = datetime.strptime(match_date, '%Y-%m-%d %H:%M:%S')
-            now = datetime.utcnow()
+        matches = []
+        events = data.get('data', {}).get('schedule', {}).get('events', [])
+        
+        for event in events[:10]:  # Top 10 matchs
+            match_data = event.get('match', {})
+            teams = match_data.get('teams', [])
+            
+            if len(teams) != 2:
+                continue
+            
+            team1 = teams[0].get('name', 'TBD')
+            team2 = teams[1].get('name', 'TBD')
+            
+            # Récupérer les scores
+            games = match_data.get('games', [])
+            team1_wins = sum(1 for game in games if game.get('teams', [{}])[0].get('side') == teams[0].get('side') and game.get('state') == 'completed')
+            team2_wins = sum(1 for game in games if game.get('teams', [{}])[1].get('side') == teams[1].get('side') and game.get('state') == 'completed')
             
             # Déterminer le statut
-            if dt > now:
-                status = 'scheduled'
-            elif (now - dt).total_seconds() < 3600 * 3:  # moins de 3h
+            state = event.get('state', 'unstarted')
+            if state == 'completed':
+                status = 'finished'
+            elif state == 'inProgress':
                 status = 'live'
             else:
-                status = 'finished'
-                
-            date_str = dt.strftime('%d %b - %H:%M')
-        except:
-            date_str = 'Date inconnue'
-            status = 'scheduled'
+                status = 'scheduled'
+            
+            # Date
+            start_time = event.get('startTime')
+            if start_time:
+                dt = datetime.fromisoformat(start_time.replace('Z', '+00:00'))
+                date_str = dt.strftime('%d %b - %H:%M')
+            else:
+                date_str = 'À déterminer'
+            
+            match = {
+                "team1": {
+                    "name": team1,
+                    "short": TEAM_LOGOS.get(team1, team1[:3].upper()),
+                    "score": team1_wins
+                },
+                "team2": {
+                    "name": team2,
+                    "short": TEAM_LOGOS.get(team2, team2[:3].upper()),
+                    "score": team2_wins
+                },
+                "date": date_str,
+                "status": status
+            }
+            
+            matches.append(match)
         
-        match = {
-            'team1': {
-                'name': title.get('Team1', 'TBD'),
-                'short': title.get('Team1', 'TBD')[:3].upper(),
-                'score': int(title.get('Team1Score', 0)) if title.get('Team1Score') else 0
-            },
-            'team2': {
-                'name': title.get('Team2', 'TBD'),
-                'short': title.get('Team2', 'TBD')[:3].upper(),
-                'score': int(title.get('Team2Score', 0)) if title.get('Team2Score') else 0
-            },
-            'date': date_str,
-            'status': status,
-            'winner': title.get('Winner', '')
-        }
+        print(f"✅ {len(matches)} matchs récupérés")
+        return matches
         
-        matches.append(match)
-    
-    return matches[:10]  # Top 10 matchs les plus récents
-
-def get_lfl_standings():
-    """Récupère le classement LFL"""
-    
-    tables = "TournamentResults=TR"
-    fields = """
-        TR.Team, TR.Wins, TR.Losses, TR.Place
-    """
-    where = "TR.OverviewPage='LFL/2025 Season/Spring Split'"
-    order_by = "TR.Place ASC"
-    
-    data = query_cargo(tables, fields, where=where, order_by=order_by)
-    
-    if not data or 'cargoquery' not in data:
-        print("Erreur : Impossible de récupérer le classement")
+    except Exception as e:
+        print(f"❌ Erreur récupération matchs: {e}")
         return []
-    
-    standings = []
-    for item in data['cargoquery']:
-        title = item['title']
+
+def get_lfl_standings(league_id):
+    """Récupère le classement LFL"""
+    try:
+        url = f"{STANDINGS_ENDPOINT}&leagueId={league_id}"
+        response = requests.get(url, headers=HEADERS, timeout=10)
+        response.raise_for_status()
+        data = response.json()
         
-        team_name = title.get('Team', 'Unknown')
-        wins = int(title.get('Wins', 0))
-        losses = int(title.get('Losses', 0))
-        rank = int(title.get('Place', 0))
+        standings = []
+        stages = data.get('data', {}).get('standings', [])
         
-        standing = {
-            'rank': rank,
-            'team': team_name,
-            'short': team_name[:3].upper(),
-            'wins': wins,
-            'losses': losses,
-            'points': wins * 3  # 3 points par victoire
-        }
+        if not stages:
+            print("⚠️ Pas de classement disponible")
+            return []
         
-        standings.append(standing)
-    
-    return standings
+        # Prendre le dernier stage (le plus récent)
+        latest_stage = stages[-1]
+        teams = latest_stage.get('stages', [{}])[0].get('sections', [{}])[0].get('rankings', [])
+        
+        for idx, team_data in enumerate(teams, 1):
+            team_name = team_data.get('teams', [{}])[0].get('name', 'Unknown')
+            
+            standing = {
+                "rank": idx,
+                "team": team_name,
+                "short": TEAM_LOGOS.get(team_name, team_name[:3].upper()),
+                "wins": team_data.get('wins', 0),
+                "losses": team_data.get('losses', 0),
+                "points": team_data.get('wins', 0) * 3  # 3 points par victoire
+            }
+            standings.append(standing)
+        
+        print(f"✅ {len(standings)} équipes au classement")
+        return standings
+        
+    except Exception as e:
+        print(f"❌ Erreur récupération classement: {e}")
+        return []
 
 def generate_lfl_data():
-    """Génère le fichier JSON avec toutes les données LFL"""
+    """Génère le fichier JSON avec toutes les données"""
+    print("🔄 Récupération des données LFL via API Riot...")
     
-    print("🔄 Récupération des données LFL...")
+    # Récupérer l'ID de la LFL
+    league_id = get_lfl_league_id()
+    
+    if not league_id:
+        print("❌ Impossible de continuer sans ID de league")
+        return None
+    
+    print(f"✅ LFL League ID: {league_id}")
     
     # Récupérer les données
-    matches = get_lfl_matches()
-    standings = get_lfl_standings()
+    matches = get_lfl_matches(league_id)
+    standings = get_lfl_standings(league_id)
     
     # Structure finale
     lfl_data = {
@@ -152,15 +186,15 @@ def generate_lfl_data():
         'standings': standings
     }
     
-    # Sauvegarder dans un fichier JSON
+    # Sauvegarder
     output_file = 'lfl-data.json'
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(lfl_data, f, indent=2, ensure_ascii=False)
     
     print(f"✅ Données sauvegardées dans {output_file}")
-    print(f"   - {len(matches)} matchs récupérés")
-    print(f"   - {len(standings)} équipes au classement")
-    print(f"   - Dernière mise à jour : {lfl_data['last_update']}")
+    print(f"   - {len(matches)} matchs")
+    print(f"   - {len(standings)} équipes")
+    print(f"   - Dernière MAJ : {lfl_data['last_update']}")
     
     return lfl_data
 
@@ -168,19 +202,23 @@ if __name__ == "__main__":
     try:
         data = generate_lfl_data()
         
-        # Afficher un aperçu
-        print("\n📊 Aperçu des données :")
-        print(f"\nDernier match :")
-        if data['matches']:
-            m = data['matches'][0]
-            print(f"  {m['team1']['name']} {m['team1']['score']}-{m['team2']['score']} {m['team2']['name']}")
-            print(f"  Status: {m['status']} | Date: {m['date']}")
-        
-        print(f"\nTop 3 du classement :")
-        for standing in data['standings'][:3]:
-            print(f"  {standing['rank']}. {standing['team']} - {standing['wins']}V {standing['losses']}D")
+        if data:
+            print("\n📊 Aperçu des données :")
+            print(f"\nDernier match :")
+            if data['matches']:
+                m = data['matches'][0]
+                print(f"  {m['team1']['name']} {m['team1']['score']}-{m['team2']['score']} {m['team2']['name']}")
+                print(f"  Status: {m['status']} | Date: {m['date']}")
+            
+            print(f"\nTop 3 du classement :")
+            for standing in data['standings'][:3]:
+                print(f"  {standing['rank']}. {standing['team']} - {standing['wins']}V {standing['losses']}D")
+        else:
+            print("❌ Échec de génération des données")
+            exit(1)
             
     except Exception as e:
         print(f"❌ Erreur : {e}")
         import traceback
         traceback.print_exc()
+        exit(1)
