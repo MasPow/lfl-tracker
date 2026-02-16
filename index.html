@@ -104,7 +104,7 @@
 
         .tabs {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             background: var(--bg-secondary);
             border-radius: 16px;
             padding: 6px;
@@ -114,12 +114,12 @@
 
         .tab {
             flex: 1;
-            padding: 12px;
+            padding: 12px 8px;
             background: transparent;
             border: none;
             color: var(--text-secondary);
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -226,6 +226,17 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        .team-score.winner {
+            background: linear-gradient(135deg, var(--win) 0%, #FFFFFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .team-score.loser {
+            opacity: 0.5;
         }
 
         .versus {
@@ -347,6 +358,109 @@
             font-weight: 700;
         }
 
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .filter-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 230, 255, 0.2);
+            color: var(--text-secondary);
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, #0088CC 100%);
+            color: var(--bg-primary);
+            border-color: var(--accent-blue);
+        }
+
+        .week-section {
+            margin-bottom: 32px;
+        }
+
+        .week-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            padding-left: 4px;
+        }
+
+        .history-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(21, 40, 71, 0.8) 100%);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0, 230, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .history-card:hover {
+            border-color: rgba(0, 230, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .history-date {
+            font-size: 11px;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .history-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-team {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .history-team.right {
+            flex-direction: row-reverse;
+        }
+
+        .history-team-name {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .history-score {
+            font-size: 24px;
+            font-weight: 900;
+            font-family: 'Orbitron', monospace;
+            color: var(--accent-blue);
+            padding: 0 12px;
+        }
+
         .refresh-btn {
             position: fixed;
             bottom: 20px;
@@ -399,6 +513,11 @@
                 padding: 12px 16px;
                 font-size: 10px;
             }
+            
+            .tab {
+                font-size: 11px;
+                padding: 10px 6px;
+            }
         }
     </style>
 </head>
@@ -412,6 +531,7 @@
         <div class="tabs">
             <button class="tab active" onclick="switchTab('results')">Résultats</button>
             <button class="tab" onclick="switchTab('ranking')">Classement</button>
+            <button class="tab" onclick="switchTab('history')">Historique</button>
         </div>
 
         <div id="results-section" class="section active">
@@ -420,6 +540,10 @@
 
         <div id="ranking-section" class="section">
             <!-- Le classement sera injecté ici -->
+        </div>
+
+        <div id="history-section" class="section">
+            <!-- L'historique sera injecté ici -->
         </div>
 
         <button class="refresh-btn" onclick="refreshData()" title="Actualiser">↻</button>
@@ -474,28 +598,84 @@
             { rank: 10, team: 'GameWard', short: 'GW', wins: 2, losses: 12, points: 6 }
         ];
 
+        const mockHistory = {
+            'Semaine 6': [
+                { date: '15 Fév', team1: 'KC', team2: 'VIT', score1: 2, score2: 1 },
+                { date: '15 Fév', team1: 'SLY', team2: 'GM', score1: 0, score2: 2 },
+                { date: '14 Fév', team1: 'BK', team2: 'GO', score1: 2, score2: 0 },
+                { date: '14 Fév', team1: 'BDS', team2: 'IJC', score1: 1, score2: 2 },
+                { date: '13 Fév', team1: 'JL', team2: 'GW', score1: 2, score2: 1 },
+            ],
+            'Semaine 5': [
+                { date: '8 Fév', team1: 'KC', team2: 'GM', score1: 2, score2: 0 },
+                { date: '8 Fév', team1: 'VIT', team2: 'BK', score1: 2, score2: 1 },
+                { date: '7 Fév', team1: 'SLY', team2: 'GO', score1: 1, score2: 2 },
+                { date: '7 Fév', team1: 'BDS', team2: 'GW', score1: 2, score2: 0 },
+                { date: '6 Fév', team1: 'IJC', team2: 'JL', score1: 0, score2: 2 },
+            ],
+            'Semaine 4': [
+                { date: '1 Fév', team1: 'KC', team2: 'BK', score1: 2, score2: 0 },
+                { date: '1 Fév', team1: 'GM', team2: 'VIT', score1: 1, score2: 2 },
+                { date: '31 Jan', team1: 'GO', team2: 'BDS', score1: 2, score2: 1 },
+                { date: '31 Jan', team1: 'SLY', team2: 'IJC', score1: 2, score2: 0 },
+                { date: '30 Jan', team1: 'GW', team2: 'JL', score1: 0, score2: 2 },
+            ],
+            'Semaine 3': [
+                { date: '25 Jan', team1: 'KC', team2: 'SLY', score1: 2, score2: 1 },
+                { date: '25 Jan', team1: 'VIT', team2: 'GO', score1: 2, score2: 0 },
+                { date: '24 Jan', team1: 'BK', team2: 'BDS', score1: 1, score2: 2 },
+                { date: '24 Jan', team1: 'GM', team2: 'IJC', score1: 2, score2: 0 },
+                { date: '23 Jan', team1: 'JL', team2: 'GW', score1: 1, score2: 2 },
+            ],
+            'Semaine 2': [
+                { date: '18 Jan', team1: 'KC', team2: 'GO', score1: 2, score2: 0 },
+                { date: '18 Jan', team1: 'VIT', team2: 'SLY', score1: 2, score2: 1 },
+                { date: '17 Jan', team1: 'BK', team2: 'GM', score1: 0, score2: 2 },
+                { date: '17 Jan', team1: 'BDS', team2: 'JL', score1: 2, score2: 1 },
+                { date: '16 Jan', team1: 'IJC', team2: 'GW', score1: 2, score2: 0 },
+            ],
+            'Semaine 1': [
+                { date: '11 Jan', team1: 'KC', team2: 'BDS', score1: 2, score2: 0 },
+                { date: '11 Jan', team1: 'GM', team2: 'SLY', score1: 2, score2: 1 },
+                { date: '10 Jan', team1: 'VIT', team2: 'IJC', score1: 2, score2: 0 },
+                { date: '10 Jan', team1: 'BK', team2: 'JL', score1: 2, score2: 1 },
+                { date: '9 Jan', team1: 'GO', team2: 'GW', score1: 2, score2: 0 },
+            ]
+        };
+
+        let currentFilter = 'all';
+        const allTeams = ['KC', 'VIT', 'SLY', 'GM', 'BK', 'GO', 'BDS', 'IJC', 'JL', 'GW'];
+
         function switchTab(tab) {
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             
             event.target.classList.add('active');
             document.getElementById(`${tab}-section`).classList.add('active');
+
+            if (tab === 'history') {
+                renderHistory();
+            }
         }
 
         function renderMatches() {
             const container = document.getElementById('results-section');
-            container.innerHTML = mockMatches.map(match => `
+            container.innerHTML = mockMatches.map(match => {
+                const winner1 = match.team1.score > match.team2.score;
+                const winner2 = match.team2.score > match.team1.score;
+                
+                return `
                 <div class="match-card">
                     <div class="match-date">${match.date}</div>
                     <div class="match-teams">
                         <div class="team">
                             <div class="team-name">${match.team1.short}</div>
-                            <div class="team-score">${match.team1.score}</div>
+                            <div class="team-score ${winner1 ? 'winner' : winner2 ? 'loser' : ''}">${match.team1.score}</div>
                         </div>
                         <div class="versus">VS</div>
                         <div class="team">
                             <div class="team-name">${match.team2.short}</div>
-                            <div class="team-score">${match.team2.score}</div>
+                            <div class="team-score ${winner2 ? 'winner' : winner1 ? 'loser' : ''}">${match.team2.score}</div>
                         </div>
                     </div>
                     <div style="text-align: center;">
@@ -504,7 +684,7 @@
                         </span>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         function renderRanking() {
@@ -537,6 +717,66 @@
             `;
         }
 
+        function renderHistory() {
+            const container = document.getElementById('history-section');
+            
+            // Filtres
+            let filtersHtml = `
+                <div class="filter-bar">
+                    <button class="filter-btn ${currentFilter === 'all' ? 'active' : ''}" onclick="filterHistory('all')">Tous</button>
+                    ${allTeams.map(team => `
+                        <button class="filter-btn ${currentFilter === team ? 'active' : ''}" onclick="filterHistory('${team}')">${team}</button>
+                    `).join('')}
+                </div>
+            `;
+
+            // Historique par semaine
+            let historyHtml = '';
+            for (const [week, matches] of Object.entries(mockHistory)) {
+                const filteredMatches = currentFilter === 'all' 
+                    ? matches 
+                    : matches.filter(m => m.team1 === currentFilter || m.team2 === currentFilter);
+
+                if (filteredMatches.length > 0) {
+                    historyHtml += `
+                        <div class="week-section">
+                            <div class="week-title">${week}</div>
+                            ${filteredMatches.map(match => {
+                                const winner1 = match.score1 > match.score2;
+                                const winner2 = match.score2 > match.score1;
+                                
+                                return `
+                                    <div class="history-card">
+                                        <div class="history-header">
+                                            <div class="history-date">${match.date}</div>
+                                        </div>
+                                        <div class="history-teams">
+                                            <div class="history-team">
+                                                <div class="team-logo">${match.team1[0]}</div>
+                                                <div class="history-team-name">${match.team1}</div>
+                                            </div>
+                                            <div class="history-score">${match.score1} - ${match.score2}</div>
+                                            <div class="history-team right">
+                                                <div class="team-logo">${match.team2[0]}</div>
+                                                <div class="history-team-name">${match.team2}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    `;
+                }
+            }
+
+            container.innerHTML = filtersHtml + historyHtml;
+        }
+
+        function filterHistory(team) {
+            currentFilter = team;
+            renderHistory();
+        }
+
         function refreshData() {
             const btn = document.querySelector('.refresh-btn');
             btn.style.transform = 'rotate(360deg)';
@@ -544,6 +784,9 @@
                 btn.style.transform = '';
                 renderMatches();
                 renderRanking();
+                if (document.getElementById('history-section').classList.contains('active')) {
+                    renderHistory();
+                }
             }, 600);
         }
 
