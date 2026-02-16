@@ -689,19 +689,20 @@
         // Données et configuration
         let lflData = { matches: [], standings: [] };
         
-        // URLs des logos des équipes (Wikia)
-        const TEAM_LOGOS = {
-            "KC": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/60/Karmine_Corplogo_square.png",
-            "VIT": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/e/e8/Team_Vitalitylogo_square.png",
-            "GM": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/f/f0/Gentle_Mateslogo_square.png",
-            "SLY": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/0/0f/Solarylogo_square.png",
-            "BK": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8c/BK_ROGlogo_square.png",
-            "GO": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/d/d4/Team_GOlogo_square.png",
-            "BDS": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/a/a1/Team_BDSlogo_square.png",
-            "IJC": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/69/Ici_Japon_Corplogo_square.png",
-            "JL": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/a/a3/JobLifelogo_square.png",
-            "GW": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/4/46/GameWardlogo_square.png"
-        };
+        ```javascript
+const TEAM_LOGOS = {
+    "KC": "https://lolstatic-a.akamaihd.net/esports-assets/production/team/karmine-corp-blue-1k1xii1m.png",
+    "VIT": "https://lolstatic-a.akamaihd.net/esports-assets/production/team/team-vitality-bee-c9hf3yoo.png",
+    "GM": "https://lolstatic-a.akamaihd.net/esports-assets/production/team/gentle-mates-92mzh37k.png",
+    "SLY": "https://lolstatic-a.akamaihd.net/esports-assets/production/team/solary-3xdvbkrs.png",
+    "BK": "https://lolstatic-a.akamaihd.net/esports-assets/production/team/bk-rog-esports-bte61bvv.png",
+    "GO": "https://lolstatic-a.akamaihd.net/esports-assets/production/team/team-go-aw2zo7jm.png",
+    "BDS": "https://lolstatic-a.akamaihd.net/esports-assets/production/team/team-bds-academy-exwjs1mf.png",
+    "IJC": "https://lolstatic-a.akamaihd.net/esports-assets/production/team/ici-japon-corp-3rxdnmce.png",
+    "JL": "https://lolstatic-a.akamaihd.net/esports-assets/production/team/joblife-bhjlixv6.png",
+    "GW": "https://lolstatic-a.akamaihd.net/esports-assets/production/team/gameward-bkzphdvg.png"
+};
+```
         
         let settings = {
             theme: localStorage.getItem('lfl-theme') || 'blue',
