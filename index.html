@@ -23,23 +23,19 @@
             --bg-secondary: #0F1F3A;
             --bg-card: #152847;
             --accent-blue: #00E6FF;
-            --accent-blue-dim: #0099B3;
             --text-primary: #FFFFFF;
             --text-secondary: #8FA3BF;
             --text-dim: #5A6B85;
             --win: #00FF88;
             --loss: #FF3366;
-            --glow: 0 0 20px rgba(0, 230, 255, 0.3);
         }
 
-        /* Thème noir */
         body.theme-dark {
             --bg-primary: #000000;
             --bg-secondary: #0A0A0A;
             --bg-card: #1A1A1A;
         }
 
-        /* Thème blanc */
         body.theme-light {
             --bg-primary: #F5F5F7;
             --bg-secondary: #FFFFFF;
@@ -50,48 +46,15 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
             color: var(--text-primary);
             min-height: 100vh;
-            overflow-x: hidden;
             padding-bottom: 80px;
             transition: all 0.3s ease;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 230, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 102, 255, 0.08) 0%, transparent 50%);
-            animation: drift 20s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-
-        body.theme-light::before {
-            opacity: 0.3;
-        }
-
-        body.theme-dark::before {
-            opacity: 0.5;
-        }
-
-        @keyframes drift {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-5%, -5%) rotate(2deg); }
-        }
-
         #app {
-            position: relative;
-            z-index: 1;
             max-width: 428px;
             margin: 0 auto;
             padding: 20px;
@@ -121,7 +84,7 @@
             font-size: 18px;
         }
 
-        .settings-btn:hover {
+        .settings-btn:active {
             background: var(--accent-blue);
             color: var(--bg-primary);
             transform: rotate(90deg);
@@ -134,21 +97,11 @@
             background: linear-gradient(135deg, var(--accent-blue) 0%, #0066FF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-            text-shadow: var(--glow);
-            animation: pulse 3s ease-in-out infinite;
             margin-bottom: 8px;
-        }
-
-        @keyframes pulse {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.2); }
         }
 
         .subtitle {
             font-size: 13px;
-            font-weight: 500;
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -156,108 +109,58 @@
 
         .tabs {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
             background: var(--bg-secondary);
             border-radius: 16px;
             padding: 6px;
             margin-bottom: 24px;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        body.theme-light .tabs {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .tab {
-            padding: 12px 6px;
+            padding: 12px 4px;
             background: transparent;
             border: none;
             color: var(--text-secondary);
             font-weight: 600;
-            font-size: 11px;
+            font-size: 10px;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         .tab.active {
             background: linear-gradient(135deg, var(--accent-blue) 0%, #0088CC 100%);
             color: var(--bg-primary);
-            box-shadow: 0 4px 12px rgba(0, 230, 255, 0.4);
-        }
-
-        .tab:active {
-            transform: scale(0.96);
         }
 
         .section {
             display: none;
-            animation: fadeIn 0.4s ease;
         }
 
         .section.active {
             display: block;
+            animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .match-card {
+        .match-card, .prono-card, .history-card, .update-card, .settings-card {
             background: var(--bg-card);
             border-radius: 20px;
             padding: 20px;
             margin-bottom: 16px;
-            position: relative;
-            overflow: hidden;
             border: 1px solid rgba(0, 230, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        body.theme-light .match-card {
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-        }
-
-        .match-card:hover {
-            border-color: rgba(0, 230, 255, 0.3);
-            box-shadow: 0 8px 24px rgba(0, 230, 255, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .match-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .match-card:hover::before {
-            opacity: 1;
         }
 
         .match-date {
             font-size: 11px;
             color: var(--text-dim);
             text-transform: uppercase;
-            letter-spacing: 1px;
             margin-bottom: 12px;
-            font-weight: 600;
         }
 
         .match-teams {
@@ -275,7 +178,6 @@
         .team-name {
             font-size: 16px;
             font-weight: 700;
-            color: var(--text-primary);
             margin-bottom: 4px;
         }
 
@@ -283,17 +185,11 @@
             font-size: 32px;
             font-weight: 900;
             font-family: 'Orbitron', monospace;
-            background: linear-gradient(135deg, var(--accent-blue) 0%, #FFFFFF 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent-blue);
         }
 
         .team-score.winner {
-            background: linear-gradient(135deg, var(--win) 0%, #FFFFFF 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--win);
         }
 
         .team-score.loser {
@@ -303,7 +199,6 @@
         .versus {
             font-size: 12px;
             color: var(--text-dim);
-            font-weight: 700;
             padding: 0 16px;
         }
 
@@ -314,18 +209,11 @@
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .status-live {
             background: linear-gradient(135deg, #FF3366 0%, #FF6B99 100%);
             color: white;
-            animation: livePulse 2s ease-in-out infinite;
-        }
-
-        @keyframes livePulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
         }
 
         .status-finished {
@@ -340,48 +228,24 @@
             border: 1px solid rgba(0, 230, 255, 0.1);
         }
 
-        body.theme-light .ranking-table {
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-        }
-
-        .ranking-header {
+        .ranking-header, .ranking-row {
             display: grid;
             grid-template-columns: 45px 1fr 70px 70px;
             gap: 12px;
             padding: 16px;
+            align-items: center;
+        }
+
+        .ranking-header {
             background: rgba(0, 230, 255, 0.1);
             font-size: 11px;
             font-weight: 700;
             color: var(--accent-blue);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        body.theme-light .ranking-header {
-            background: rgba(0, 230, 255, 0.05);
         }
 
         .ranking-row {
-            display: grid;
-            grid-template-columns: 45px 1fr 70px 70px;
-            gap: 12px;
-            padding: 16px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            align-items: center;
-            transition: background 0.3s ease;
-        }
-
-        body.theme-light .ranking-row {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .ranking-row:hover {
-            background: rgba(0, 230, 255, 0.05);
-        }
-
-        .ranking-row:last-child {
-            border-bottom: none;
         }
 
         .rank {
@@ -413,14 +277,11 @@
             font-weight: 900;
             font-size: 14px;
             color: white;
-            flex-shrink: 0;
         }
 
         .team-full-name {
             font-weight: 600;
-            color: var(--text-primary);
             font-size: 14px;
-            line-height: 1.3;
         }
 
         .stat {
@@ -432,7 +293,6 @@
 
         .stat-highlight {
             color: var(--win);
-            font-weight: 700;
         }
 
         .filter-bar {
@@ -440,12 +300,6 @@
             gap: 8px;
             margin-bottom: 20px;
             overflow-x: auto;
-            padding-bottom: 8px;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .filter-bar::-webkit-scrollbar {
-            display: none;
         }
 
         .filter-btn {
@@ -455,20 +309,13 @@
             color: var(--text-secondary);
             border-radius: 12px;
             font-size: 12px;
-            font-weight: 600;
             cursor: pointer;
             white-space: nowrap;
-            transition: all 0.3s ease;
         }
 
         .filter-btn.active {
-            background: linear-gradient(135deg, var(--accent-blue) 0%, #0088CC 100%);
+            background: var(--accent-blue);
             color: var(--bg-primary);
-            border-color: var(--accent-blue);
-        }
-
-        .week-section {
-            margin-bottom: 32px;
         }
 
         .week-title {
@@ -476,40 +323,7 @@
             font-weight: 700;
             color: var(--accent-blue);
             text-transform: uppercase;
-            letter-spacing: 2px;
             margin-bottom: 16px;
-            padding-left: 4px;
-        }
-
-        .history-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(0, 230, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        body.theme-light .history-card {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        }
-
-        .history-card:hover {
-            border-color: rgba(0, 230, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        .history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .history-date {
-            font-size: 11px;
-            color: var(--text-dim);
-            font-weight: 600;
         }
 
         .history-teams {
@@ -529,11 +343,6 @@
             flex-direction: row-reverse;
         }
 
-        .history-team-name {
-            font-size: 14px;
-            font-weight: 700;
-        }
-
         .history-score {
             font-size: 24px;
             font-weight: 900;
@@ -543,24 +352,8 @@
         }
 
         .prono-card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 16px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0, 230, 255, 0.1);
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        body.theme-light .prono-card {
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .prono-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 230, 255, 0.15);
+            position: relative;
         }
 
         .prono-card::after {
@@ -572,25 +365,16 @@
             opacity: 0.3;
         }
 
-        .prono-winner {
-            position: relative;
-        }
-
         .prono-winner::before {
             content: '✨';
-            position: absolute;
-            left: -24px;
-            font-size: 16px;
+            margin-right: 8px;
         }
 
         .prediction-bar {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
             height: 8px;
             border-radius: 4px;
-            overflow: hidden;
             background: rgba(0, 0, 0, 0.2);
+            margin-top: 12px;
         }
 
         .prediction-fill {
@@ -606,7 +390,6 @@
             margin-top: 8px;
             font-size: 11px;
             color: var(--text-dim);
-            font-weight: 600;
         }
 
         .confidence {
@@ -616,7 +399,6 @@
             font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
             margin-top: 8px;
         }
 
@@ -634,11 +416,10 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
-            margin-top: 0;
         }
 
         .prono-details.expanded {
-            max-height: 500px;
+            max-height: 1000px;
             margin-top: 16px;
         }
 
@@ -649,17 +430,11 @@
             margin-bottom: 12px;
         }
 
-        body.theme-light .detail-section {
-            background: rgba(0, 230, 255, 0.03);
-        }
-
         .detail-title {
             font-size: 13px;
             font-weight: 700;
             color: var(--accent-blue);
             margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .detail-text {
@@ -668,43 +443,19 @@
             line-height: 1.6;
         }
 
-        .detail-stat {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .detail-stat:last-child {
-            border-bottom: none;
-        }
-
         .expand-indicator {
             text-align: center;
             color: var(--text-dim);
             font-size: 11px;
             margin-top: 8px;
-            font-weight: 600;
         }
 
-        /* PATCHNOTES */
         .patchnote-hero {
             background: linear-gradient(135deg, var(--accent-blue) 0%, #0066FF 100%);
             border-radius: 24px;
             padding: 32px 24px;
             margin-bottom: 32px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .patchnote-hero::before {
-            content: '✨';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 40px;
-            opacity: 0.3;
         }
 
         .patchnote-version {
@@ -712,27 +463,13 @@
             font-size: 48px;
             font-weight: 900;
             color: var(--bg-primary);
-            margin-bottom: 8px;
         }
 
         .patchnote-date {
             font-size: 14px;
             color: rgba(10, 22, 40, 0.7);
-            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
-        }
-
-        .update-card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(0, 230, 255, 0.1);
-        }
-
-        body.theme-light .update-card {
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
         }
 
         .update-tag {
@@ -742,7 +479,6 @@
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
             margin-bottom: 12px;
         }
 
@@ -764,63 +500,20 @@
         .update-title {
             font-size: 20px;
             font-weight: 800;
-            color: var(--text-primary);
             margin-bottom: 12px;
-            line-height: 1.3;
         }
 
         .update-desc {
             font-size: 14px;
             color: var(--text-secondary);
             line-height: 1.7;
-            margin-bottom: 16px;
-        }
-
-        .update-features {
-            list-style: none;
-            padding: 0;
-        }
-
-        .update-features li {
-            padding: 8px 0;
-            padding-left: 28px;
-            position: relative;
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .update-features li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent-blue);
-            font-weight: 700;
-        }
-
-        /* SETTINGS */
-        .settings-section {
-            margin-bottom: 32px;
         }
 
         .settings-title {
             font-size: 18px;
             font-weight: 800;
-            color: var(--text-primary);
             margin-bottom: 16px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .settings-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(0, 230, 255, 0.1);
-        }
-
-        body.theme-light .settings-card {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
         .setting-item {
@@ -831,22 +524,13 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        body.theme-light .setting-item {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
         .setting-item:last-child {
             border-bottom: none;
-        }
-
-        .setting-info {
-            flex: 1;
         }
 
         .setting-label {
             font-size: 15px;
             font-weight: 600;
-            color: var(--text-primary);
             margin-bottom: 4px;
         }
 
@@ -884,7 +568,6 @@
             color: white;
             font-weight: 700;
             opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
         .theme-option.active::after {
@@ -901,10 +584,8 @@
 
         .theme-light-opt {
             background: linear-gradient(135deg, #FFFFFF 0%, #F5F5F7 100%);
-            border: 2px solid rgba(0, 0, 0, 0.1);
         }
 
-        /* Toggle Switch */
         .toggle-switch {
             position: relative;
             width: 52px;
@@ -942,7 +623,6 @@
             margin-top: 12px;
             font-size: 12px;
             color: #FFA500;
-            line-height: 1.5;
         }
 
         .refresh-btn {
@@ -957,34 +637,11 @@
             color: white;
             font-size: 24px;
             cursor: pointer;
-            box-shadow: 0 8px 24px rgba(0, 230, 255, 0.4);
-            transition: all 0.3s ease;
             z-index: 100;
         }
 
-        .refresh-btn:hover {
-            transform: scale(1.1) rotate(90deg);
-            box-shadow: 0 12px 32px rgba(0, 230, 255, 0.6);
-        }
-
-        .refresh-btn:active {
-            transform: scale(0.95) rotate(180deg);
-        }
-
         @media (max-width: 380px) {
-            .tab {
-                font-size: 10px;
-                padding: 10px 4px;
-            }
-            
-            .team-full-name {
-                font-size: 12px;
-            }
-            
-            .stat {
-                font-size: 13px;
-            }
-
+            .tab { font-size: 9px; padding: 10px 2px; }
             .ranking-header, .ranking-row {
                 grid-template-columns: 40px 1fr 65px 65px;
                 gap: 8px;
@@ -996,72 +653,38 @@
 <body>
     <div id="app">
         <div class="header">
-            <button class="settings-btn" onclick="switchTab('settings')">⚙️</button>
+            <button class="settings-btn" id="settings-btn">⚙️</button>
             <div class="logo">LFL</div>
             <div class="subtitle">Ligue Française</div>
         </div>
 
         <div class="tabs">
-            <button class="tab active" onclick="switchTab('results')">Résultats</button>
-            <button class="tab" onclick="switchTab('ranking')">Classement</button>
-            <button class="tab" onclick="switchTab('history')">Historique</button>
-            <button class="tab" onclick="switchTab('pronostics')">Pronostics</button>
+            <button class="tab active" data-tab="results">Résultats</button>
+            <button class="tab" data-tab="ranking">Classement</button>
+            <button class="tab" data-tab="history">Historique</button>
+            <button class="tab" data-tab="pronostics">Pronos</button>
+            <button class="tab" data-tab="patchnotes">Patch</button>
         </div>
 
         <div id="results-section" class="section active"></div>
         <div id="ranking-section" class="section"></div>
         <div id="history-section" class="section"></div>
         <div id="pronostics-section" class="section"></div>
+        <div id="patchnotes-section" class="section"></div>
         <div id="settings-section" class="section"></div>
 
-        <button class="refresh-btn" onclick="refreshData()" title="Actualiser">↻</button>
+        <button class="refresh-btn" id="refresh-btn">↻</button>
     </div>
 
     <script>
-        // Configuration et données
-        let mockMatches = [];
-        let mockRanking = [];
-        let lastDataUpdate = null;
-
-        // Charger les données depuis le JSON
-        async function loadLFLData() {
-            try {
-                const response = await fetch('lfl-data.json?t=' + Date.now());
-                const data = await response.json();
-                
-                mockMatches = data.matches || [];
-                mockRanking = data.standings || [];
-                lastDataUpdate = data.last_update;
-                
-                console.log('✅ Données LFL chargées:', {
-                    matches: mockMatches.length,
-                    standings: mockRanking.length,
-                    lastUpdate: lastDataUpdate
-                });
-                
-                // Re-render les sections actives
-                const activeSection = document.querySelector('.section.active')?.id;
-                if (activeSection === 'results-section') renderMatches();
-                if (activeSection === 'ranking-section') renderRanking();
-                
-                return true;
-            } catch (error) {
-                console.error('❌ Erreur chargement données:', error);
-                // Garder les données de fallback
-                mockMatches = [
-                    {
-                        team1: { name: 'Karmine Corp', short: 'KC', score: 2 },
-                        team2: { name: 'Vitality.Bee', short: 'VIT', score: 1 },
-                        date: 'Données en cache',
-                        status: 'finished'
-                    }
-                ];
-                mockRanking = [
-                    { rank: 1, team: 'Karmine Corp', short: 'KC', wins: 12, losses: 2, points: 36 }
-                ];
-                return false;
-            }
-        }
+        // Données et configuration
+        let lflData = { matches: [], standings: [] };
+        let settings = {
+            theme: localStorage.getItem('lfl-theme') || 'blue',
+            notifications: localStorage.getItem('lfl-notifications') === 'true'
+        };
+        let currentFilter = 'all';
+        const allTeams = ['KC', 'VIT', 'SLY', 'GM', 'BK', 'GO', 'BDS', 'IJC', 'JL', 'GW'];
 
         const mockHistory = {
             'Semaine 6': [
@@ -1069,42 +692,14 @@
                 { date: '15 Fév', team1: 'SLY', team2: 'GM', score1: 0, score2: 2 },
                 { date: '14 Fév', team1: 'BK', team2: 'GO', score1: 2, score2: 0 },
                 { date: '14 Fév', team1: 'BDS', team2: 'IJC', score1: 1, score2: 2 },
-                { date: '13 Fév', team1: 'JL', team2: 'GW', score1: 2, score2: 1 },
+                { date: '13 Fév', team1: 'JL', team2: 'GW', score1: 2, score2: 1 }
             ],
             'Semaine 5': [
                 { date: '8 Fév', team1: 'KC', team2: 'GM', score1: 2, score2: 0 },
                 { date: '8 Fév', team1: 'VIT', team2: 'BK', score1: 2, score2: 1 },
                 { date: '7 Fév', team1: 'SLY', team2: 'GO', score1: 1, score2: 2 },
                 { date: '7 Fév', team1: 'BDS', team2: 'GW', score1: 2, score2: 0 },
-                { date: '6 Fév', team1: 'IJC', team2: 'JL', score1: 0, score2: 2 },
-            ],
-            'Semaine 4': [
-                { date: '1 Fév', team1: 'KC', team2: 'BK', score1: 2, score2: 0 },
-                { date: '1 Fév', team1: 'GM', team2: 'VIT', score1: 1, score2: 2 },
-                { date: '31 Jan', team1: 'GO', team2: 'BDS', score1: 2, score2: 1 },
-                { date: '31 Jan', team1: 'SLY', team2: 'IJC', score1: 2, score2: 0 },
-                { date: '30 Jan', team1: 'GW', team2: 'JL', score1: 0, score2: 2 },
-            ],
-            'Semaine 3': [
-                { date: '25 Jan', team1: 'KC', team2: 'SLY', score1: 2, score2: 1 },
-                { date: '25 Jan', team1: 'VIT', team2: 'GO', score1: 2, score2: 0 },
-                { date: '24 Jan', team1: 'BK', team2: 'BDS', score1: 1, score2: 2 },
-                { date: '24 Jan', team1: 'GM', team2: 'IJC', score1: 2, score2: 0 },
-                { date: '23 Jan', team1: 'JL', team2: 'GW', score1: 1, score2: 2 },
-            ],
-            'Semaine 2': [
-                { date: '18 Jan', team1: 'KC', team2: 'GO', score1: 2, score2: 0 },
-                { date: '18 Jan', team1: 'VIT', team2: 'SLY', score1: 2, score2: 1 },
-                { date: '17 Jan', team1: 'BK', team2: 'GM', score1: 0, score2: 2 },
-                { date: '17 Jan', team1: 'BDS', team2: 'JL', score1: 2, score2: 1 },
-                { date: '16 Jan', team1: 'IJC', team2: 'GW', score1: 2, score2: 0 },
-            ],
-            'Semaine 1': [
-                { date: '11 Jan', team1: 'KC', team2: 'BDS', score1: 2, score2: 0 },
-                { date: '11 Jan', team1: 'GM', team2: 'SLY', score1: 2, score2: 1 },
-                { date: '10 Jan', team1: 'VIT', team2: 'IJC', score1: 2, score2: 0 },
-                { date: '10 Jan', team1: 'BK', team2: 'JL', score1: 2, score2: 1 },
-                { date: '9 Jan', team1: 'GO', team2: 'GW', score1: 2, score2: 0 },
+                { date: '6 Fév', team1: 'IJC', team2: 'JL', score1: 0, score2: 2 }
             ]
         };
 
@@ -1116,12 +711,12 @@
                 prediction: 'KC',
                 probability: 75,
                 confidence: 'high',
-                reason: 'KC en excellente forme, 5 victoires consécutives',
+                reason: 'KC en excellente forme',
                 details: {
-                    formKC: 'KC est sur une série de 5 victoires d\'affilée avec une moyenne de 25 kills par game. Leur botlane domine actuellement la LFL.',
-                    formBDS: 'BDS lutte en milieu de tableau avec des performances inconstantes. Leur early game est souvent passif.',
-                    h2h: 'KC a remporté les 4 dernières confrontations contre BDS avec une moyenne de 2-0.',
-                    keyFactors: ['Forme actuelle de KC exceptionnelle', 'Jungle difference attendue', 'BDS en phase de reconstruction']
+                    formKC: 'KC sur une série de 5 victoires avec 25 kills/game',
+                    formBDS: 'BDS lutte avec des performances inconstantes',
+                    h2h: 'KC a gagné les 4 derniers matchs 2-0',
+                    keyFactors: ['Forme KC exceptionnelle', 'Jungle difference', 'BDS en reconstruction']
                 }
             },
             {
@@ -1131,12 +726,12 @@
                 prediction: 'VIT',
                 probability: 65,
                 confidence: 'medium',
-                reason: 'VIT légèrement favori, match serré attendu',
+                reason: 'VIT légèrement favori',
                 details: {
-                    formVIT: 'Vitality.Bee affiche un jeu solide avec une bonne macro-game et peu d\'erreurs. Leur midlaner est en forme.',
-                    formSLY: 'Solary montre des signes de résilience avec des comebacks impressionnants. Leur teamfight est redoutable.',
-                    h2h: 'Historique équilibré : 3-3 sur les 6 derniers matchs. Tous les games ont été serrés.',
-                    keyFactors: ['Match très équilibré', 'Draft sera déterminant', 'Peut basculer sur un teamfight']
+                    formVIT: 'Bonne macro-game, midlaner en forme',
+                    formSLY: 'Comebacks impressionnants, teamfight redoutable',
+                    h2h: 'Historique 3-3, matchs serrés',
+                    keyFactors: ['Match équilibré', 'Draft déterminant', 'Peut basculer']
                 }
             },
             {
@@ -1146,111 +741,81 @@
                 prediction: 'GM',
                 probability: 70,
                 confidence: 'high',
-                reason: 'GM domine les confrontations directes (3-1)',
+                reason: 'GM domine les H2H (3-1)',
                 details: {
-                    formGM: 'Gentle Mates revient en force avec une botlane qui fait des ravages. Leur vision control est top tier.',
-                    formBK: 'BK ROG peine à trouver son rythme. Beaucoup d\'erreurs individuelles ces dernières semaines.',
-                    h2h: 'GM a gagné 3 des 4 derniers matchs, souvent de manière dominante avec des scores nets.',
-                    keyFactors: ['Synergie GM bien supérieure', 'BK manque de cohésion', 'Avantage psychologique GM']
-                }
-            },
-            {
-                date: 'Dimanche 18 Fév - 20:00',
-                team1: 'GO',
-                team2: 'IJC',
-                prediction: 'GO',
-                probability: 60,
-                confidence: 'medium',
-                reason: 'Forme récente de GO en amélioration',
-                details: {
-                    formGO: 'Team GO montre de belles choses avec un nouveau coach. Leur agressivité en early paie.',
-                    formIJC: 'Ici Japon Corp reste imprévisible. Capable du meilleur comme du pire selon les jours.',
-                    h2h: 'Récemment équilibré mais GO semble avoir trouvé la formule contre le style de IJC.',
-                    keyFactors: ['GO plus consistant', 'IJC trop aléatoire', 'Momentum avec GO']
-                }
-            },
-            {
-                date: 'Lundi 19 Fév - 19:00',
-                team1: 'JL',
-                team2: 'GW',
-                prediction: 'JL',
-                probability: 55,
-                confidence: 'medium',
-                reason: 'Match équilibré entre deux équipes en bas de tableau',
-                details: {
-                    formJL: 'JobLife cherche sa place avec de jeunes talents prometteurs mais inexpérimentés.',
-                    formGW: 'GameWard en difficulté cette split, manque de synergies et beaucoup de changements de roster.',
-                    h2h: 'Peu de données, mais JL semble avoir un leger edge mental sur ce matchup.',
-                    keyFactors: ['Match crucial pour le bas de tableau', 'Pression égale sur les deux teams', 'Petite faveur à JL']
+                    formGM: 'Botlane dévastatrice, vision control top',
+                    formBK: 'Peine à trouver le rythme, erreurs individuelles',
+                    h2h: 'GM a gagné 3/4 derniers matchs',
+                    keyFactors: ['Synergie GM supérieure', 'BK manque cohésion', 'Avantage mental GM']
                 }
             }
         ];
 
-        let currentFilter = 'all';
-        const allTeams = ['KC', 'VIT', 'SLY', 'GM', 'BK', 'GO', 'BDS', 'IJC', 'JL', 'GW'];
+        // Charger données
+        async function loadLFLData() {
+            try {
+                const response = await fetch('lfl-data.json?t=' + Date.now());
+                const data = await response.json();
+                lflData.matches = data.matches || [];
+                lflData.standings = data.standings || [];
+                console.log('✅ Données chargées');
+                return true;
+            } catch (error) {
+                console.log('⚠️ Données de fallback');
+                lflData.matches = [
+                    {
+                        team1: { name: 'Karmine Corp', short: 'KC', score: 2 },
+                        team2: { name: 'Vitality.Bee', short: 'VIT', score: 1 },
+                        date: '16 Fév - 18:00',
+                        status: 'finished'
+                    }
+                ];
+                lflData.standings = [
+                    { rank: 1, team: 'Karmine Corp', short: 'KC', wins: 12, losses: 2, points: 36 }
+                ];
+                return false;
+            }
+        }
 
-        // Settings avec localStorage
-        let settings = {
-            theme: localStorage.getItem('lfl-theme') || 'blue',
-            notifications: localStorage.getItem('lfl-notifications') === 'true'
-        };
-
-        // Appliquer le thème au chargement
+        // Appliquer thème
         function applyTheme(theme) {
             document.body.className = '';
-            if (theme === 'dark') {
-                document.body.classList.add('theme-dark');
-            } else if (theme === 'light') {
-                document.body.classList.add('theme-light');
-            }
+            if (theme === 'dark') document.body.classList.add('theme-dark');
+            else if (theme === 'light') document.body.classList.add('theme-light');
             settings.theme = theme;
             localStorage.setItem('lfl-theme', theme);
         }
 
-        // Appliquer au chargement
         applyTheme(settings.theme);
 
-        function switchTab(tab) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            
-            if (event && event.target) {
-                event.target.classList.add('active');
-            }
-            document.getElementById(`${tab}-section`).classList.add('active');
-
-            if (tab === 'history') renderHistory();
-            if (tab === 'pronostics') renderPronostics();
-            if (tab === 'settings') renderSettings();
-        }
-
+        // Render functions
         function renderMatches() {
             const container = document.getElementById('results-section');
-            container.innerHTML = mockMatches.map(match => {
+            container.innerHTML = lflData.matches.map(match => {
                 const winner1 = match.team1.score > match.team2.score;
                 const winner2 = match.team2.score > match.team1.score;
-                
                 return `
-                <div class="match-card">
-                    <div class="match-date">${match.date}</div>
-                    <div class="match-teams">
-                        <div class="team">
-                            <div class="team-name">${match.team1.short}</div>
-                            <div class="team-score ${winner1 ? 'winner' : winner2 ? 'loser' : ''}">${match.team1.score}</div>
+                    <div class="match-card">
+                        <div class="match-date">${match.date}</div>
+                        <div class="match-teams">
+                            <div class="team">
+                                <div class="team-name">${match.team1.short}</div>
+                                <div class="team-score ${winner1 ? 'winner' : winner2 ? 'loser' : ''}">${match.team1.score}</div>
+                            </div>
+                            <div class="versus">VS</div>
+                            <div class="team">
+                                <div class="team-name">${match.team2.short}</div>
+                                <div class="team-score ${winner2 ? 'winner' : winner1 ? 'loser' : ''}">${match.team2.score}</div>
+                            </div>
                         </div>
-                        <div class="versus">VS</div>
-                        <div class="team">
-                            <div class="team-name">${match.team2.short}</div>
-                            <div class="team-score ${winner2 ? 'winner' : winner1 ? 'loser' : ''}">${match.team2.score}</div>
+                        <div style="text-align: center;">
+                            <span class="match-status ${match.status === 'live' ? 'status-live' : 'status-finished'}">
+                                ${match.status === 'live' ? '● EN DIRECT' : match.status === 'finished' ? 'Terminé' : 'À venir'}
+                            </span>
                         </div>
                     </div>
-                    <div style="text-align: center;">
-                        <span class="match-status ${match.status === 'live' ? 'status-live' : 'status-finished'}">
-                            ${match.status === 'live' ? '● EN DIRECT' : match.status === 'finished' ? 'Terminé' : 'À venir'}
-                        </span>
-                    </div>
-                </div>
-            `}).join('');
+                `;
+            }).join('');
         }
 
         function renderRanking() {
@@ -1258,12 +823,9 @@
             container.innerHTML = `
                 <div class="ranking-table">
                     <div class="ranking-header">
-                        <div>#</div>
-                        <div>Équipe</div>
-                        <div>V-D</div>
-                        <div>Pts</div>
+                        <div>#</div><div>Équipe</div><div>V-D</div><div>Pts</div>
                     </div>
-                    ${mockRanking.map(team => `
+                    ${lflData.standings.map(team => `
                         <div class="ranking-row">
                             <div class="rank rank-${team.rank}">${team.rank}</div>
                             <div class="team-info">
@@ -1280,7 +842,6 @@
 
         function renderHistory() {
             const container = document.getElementById('history-section');
-            
             let filtersHtml = `
                 <div class="filter-bar">
                     <button class="filter-btn ${currentFilter === 'all' ? 'active' : ''}" onclick="filterHistory('all')">Tous</button>
@@ -1289,31 +850,24 @@
                     `).join('')}
                 </div>
             `;
-
             let historyHtml = '';
             for (const [week, matches] of Object.entries(mockHistory)) {
-                const filteredMatches = currentFilter === 'all' 
-                    ? matches 
-                    : matches.filter(m => m.team1 === currentFilter || m.team2 === currentFilter);
-
-                if (filteredMatches.length > 0) {
+                const filtered = currentFilter === 'all' ? matches : matches.filter(m => m.team1 === currentFilter || m.team2 === currentFilter);
+                if (filtered.length > 0) {
                     historyHtml += `
                         <div class="week-section">
                             <div class="week-title">${week}</div>
-                            ${filteredMatches.map(match => `
+                            ${filtered.map(match => `
                                 <div class="history-card">
-                                    <div class="history-header">
-                                        <div class="history-date">${match.date}</div>
-                                    </div>
                                     <div class="history-teams">
                                         <div class="history-team">
                                             <div class="team-logo">${match.team1[0]}</div>
-                                            <div class="history-team-name">${match.team1}</div>
+                                            <div class="team-full-name">${match.team1}</div>
                                         </div>
                                         <div class="history-score">${match.score1} - ${match.score2}</div>
                                         <div class="history-team right">
                                             <div class="team-logo">${match.team2[0]}</div>
-                                            <div class="history-team-name">${match.team2}</div>
+                                            <div class="team-full-name">${match.team2}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -1322,14 +876,13 @@
                     `;
                 }
             }
-
             container.innerHTML = filtersHtml + historyHtml;
         }
 
         function renderPronostics() {
             const container = document.getElementById('pronostics-section');
             container.innerHTML = mockPronostics.map((prono, index) => `
-                <div class="prono-card" onclick="togglePronoDetails(${index})">
+                <div class="prono-card" data-prono-index="${index}">
                     <div class="match-date">${prono.date}</div>
                     <div class="match-teams">
                         <div class="team ${prono.prediction === prono.team1 ? 'prono-winner' : ''}">
@@ -1353,7 +906,6 @@
                     <span class="confidence confidence-${prono.confidence}">
                         ${prono.confidence === 'high' ? 'Confiance élevée' : 'Confiance moyenne'}
                     </span>
-                    
                     <div class="prono-details" id="prono-details-${index}">
                         <div class="detail-section">
                             <div class="detail-title">📊 Forme de ${prono.team1}</div>
@@ -1372,121 +924,109 @@
                             ${prono.details.keyFactors.map(f => `<div class="detail-text">• ${f}</div>`).join('')}
                         </div>
                     </div>
-                    
-                    <div class="expand-indicator">Cliquez pour ${document.getElementById('prono-details-' + index)?.classList.contains('expanded') ? 'masquer' : 'voir'} les détails ▼</div>
+                    <div class="expand-indicator">Cliquez pour voir les détails ▼</div>
                 </div>
             `).join('');
+
+            // Ajouter les event listeners
+            document.querySelectorAll('.prono-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const index = this.dataset.pronoIndex;
+                    const details = document.getElementById(`prono-details-${index}`);
+                    if (details) {
+                        details.classList.toggle('expanded');
+                        const indicator = this.querySelector('.expand-indicator');
+                        indicator.textContent = details.classList.contains('expanded') 
+                            ? 'Cliquez pour masquer ▲' 
+                            : 'Cliquez pour voir les détails ▼';
+                    }
+                });
+            });
         }
 
-        function togglePronoDetails(index) {
-            const details = document.getElementById(`prono-details-${index}`);
-            if (details) {
-                details.classList.toggle('expanded');
-            }
-            // Re-render pour update le texte
-            setTimeout(() => renderPronostics(), 10);
-        }
-
-        function renderSettings() {
-            const container = document.getElementById('settings-section');
+        function renderPatchnotes() {
+            const container = document.getElementById('patchnotes-section');
             container.innerHTML = `
                 <div class="patchnote-hero">
                     <div class="patchnote-version">v2.0</div>
                     <div class="patchnote-date">16 Février 2026</div>
                 </div>
-
                 <div class="update-card">
                     <span class="update-tag tag-new">Nouveau</span>
                     <div class="update-title">🎨 Système de Thèmes</div>
-                    <div class="update-desc">
-                        Personnalisez l'apparence de l'app avec 3 thèmes : Bleu (défaut), Noir total, et Blanc épuré.
-                    </div>
+                    <div class="update-desc">Bleu, Noir, Blanc - Personnalisez à fond !</div>
                 </div>
-
                 <div class="update-card">
                     <span class="update-tag tag-new">Nouveau</span>
-                    <div class="update-title">🔔 Notifications de Matchs</div>
-                    <div class="update-desc">
-                        Recevez une notification quand un match commence (Android uniquement pour l'instant).
-                    </div>
+                    <div class="update-title">🔔 Notifications</div>
+                    <div class="update-desc">Alertes de matchs en direct (Android)</div>
                 </div>
-
                 <div class="update-card">
                     <span class="update-tag tag-improved">Amélioré</span>
-                    <div class="update-title">📊 Détails des Pronostics</div>
-                    <div class="update-desc">
-                        Cliquez sur un pronostic pour voir l'analyse complète : forme des équipes, historique H2H, et facteurs clés.
-                    </div>
+                    <div class="update-title">📊 Détails Pronostics</div>
+                    <div class="update-desc">Analyse complète H2H et stats</div>
                 </div>
-
                 <div class="update-card">
                     <span class="update-tag tag-fixed">Corrigé</span>
-                    <div class="update-title">📱 Alignement du Classement</div>
-                    <div class="update-desc">
-                        Le tableau de classement s'affiche maintenant parfaitement sur tous les écrans, même les plus petits.
-                    </div>
+                    <div class="update-title">📱 Alignement Classement</div>
+                    <div class="update-desc">Parfait sur tous les écrans</div>
                 </div>
-
-                <div style="margin-top: 40px;">
-                    <div class="settings-section">
-                        <div class="settings-title">⚙️ Paramètres</div>
-                        
-                        <div class="settings-card">
-                            <div class="setting-item">
-                                <div class="setting-info">
-                                    <div class="setting-label">Thème</div>
-                                    <div class="setting-sublabel">Personnalisez l'apparence</div>
-                                </div>
-                                <div class="theme-selector">
-                                    <div class="theme-option theme-blue ${settings.theme === 'blue' ? 'active' : ''}" onclick="changeTheme('blue')"></div>
-                                    <div class="theme-option theme-dark ${settings.theme === 'dark' ? 'active' : ''}" onclick="changeTheme('dark')"></div>
-                                    <div class="theme-option theme-light-opt ${settings.theme === 'light' ? 'active' : ''}" onclick="changeTheme('light')"></div>
-                                </div>
-                            </div>
-
-                            <div class="setting-item">
-                                <div class="setting-info">
-                                    <div class="setting-label">Notifications</div>
-                                    <div class="setting-sublabel">Matchs en direct</div>
-                                </div>
-                                <div class="toggle-switch ${settings.notifications ? 'active' : ''}" onclick="toggleNotifications()">
-                                    <div class="toggle-slider"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="notif-warning">
-                            ⚠️ <strong>iOS:</strong> Les notifications push ne sont pas supportées par Safari. Fonctionne uniquement sur Android pour le moment.
-                        </div>
-                    </div>
+                <div class="update-card">
+                    <span class="update-tag tag-new">Nouveau</span>
+                    <div class="update-title">🔄 Backend Auto</div>
+                    <div class="update-desc">Données auto toutes les 15min</div>
                 </div>
             `;
         }
 
-        function changeTheme(theme) {
-            applyTheme(theme);
-            renderSettings();
-        }
+        function renderSettings() {
+            const container = document.getElementById('settings-section');
+            container.innerHTML = `
+                <div class="settings-title">⚙️ Paramètres</div>
+                <div class="settings-card">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-label">Thème</div>
+                            <div class="setting-sublabel">Apparence</div>
+                        </div>
+                        <div class="theme-selector">
+                            <div class="theme-option theme-blue ${settings.theme === 'blue' ? 'active' : ''}" data-theme="blue"></div>
+                            <div class="theme-option theme-dark ${settings.theme === 'dark' ? 'active' : ''}" data-theme="dark"></div>
+                            <div class="theme-option theme-light-opt ${settings.theme === 'light' ? 'active' : ''}" data-theme="light"></div>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <div class="setting-label">Notifications</div>
+                            <div class="setting-sublabel">Matchs live</div>
+                        </div>
+                        <div class="toggle-switch ${settings.notifications ? 'active' : ''}" id="notif-toggle">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="notif-warning">
+                    ⚠️ <strong>iOS:</strong> Notifications non supportées par Safari
+                </div>
+            `;
 
-        function toggleNotifications() {
-            settings.notifications = !settings.notifications;
-            localStorage.setItem('lfl-notifications', settings.notifications);
-            
-            if (settings.notifications) {
-                // Demander la permission (ne marche que sur Android)
-                if ('Notification' in window && Notification.permission === 'default') {
-                    Notification.requestPermission().then(permission => {
-                        if (permission === 'granted') {
-                            new Notification('LFL Tracker', {
-                                body: 'Notifications activées ! Vous serez prévenu des matchs en direct.',
-                                icon: '/icon.png'
-                            });
-                        }
-                    });
-                }
+            // Event listeners
+            document.querySelectorAll('.theme-option').forEach(opt => {
+                opt.addEventListener('click', function() {
+                    const theme = this.dataset.theme;
+                    applyTheme(theme);
+                    renderSettings();
+                });
+            });
+
+            const toggle = document.getElementById('notif-toggle');
+            if (toggle) {
+                toggle.addEventListener('click', function() {
+                    settings.notifications = !settings.notifications;
+                    localStorage.setItem('lfl-notifications', settings.notifications);
+                    renderSettings();
+                });
             }
-            
-            renderSettings();
         }
 
         function filterHistory(team) {
@@ -1494,37 +1034,40 @@
             renderHistory();
         }
 
-        function refreshData() {
-            const btn = document.querySelector('.refresh-btn');
-            btn.style.transform = 'rotate(360deg)';
-            
+        // Switch tabs
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.dataset.tab;
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById(`${tabName}-section`).classList.add('active');
+                
+                if (tabName === 'history') renderHistory();
+                if (tabName === 'pronostics') renderPronostics();
+                if (tabName === 'patchnotes') renderPatchnotes();
+            });
+        });
+
+        // Settings button
+        document.getElementById('settings-btn').addEventListener('click', function() {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById('settings-section').classList.add('active');
+            renderSettings();
+        });
+
+        // Refresh button
+        document.getElementById('refresh-btn').addEventListener('click', function() {
+            this.style.transform = 'rotate(360deg)';
             loadLFLData().then(() => {
                 setTimeout(() => {
-                    btn.style.transform = '';
+                    this.style.transform = '';
                     renderMatches();
                     renderRanking();
-                    const activeSection = document.querySelector('.section.active').id;
-                    if (activeSection === 'history-section') renderHistory();
-                    if (activeSection === 'pronostics-section') renderPronostics();
-                    if (activeSection === 'settings-section') renderSettings();
                 }, 300);
             });
-        }
-
-        // Simuler notifications pour matchs live (seulement si activé)
-        function checkLiveMatches() {
-            if (settings.notifications && 'Notification' in window && Notification.permission === 'granted') {
-                mockMatches.forEach(match => {
-                    if (match.status === 'live') {
-                        // En vrai tu ferais un check pour voir si déjà notifié
-                        new Notification(`Match en direct !`, {
-                            body: `${match.team1.short} vs ${match.team2.short} - ${match.team1.score}:${match.team2.score}`,
-                            icon: '/icon.png'
-                        });
-                    }
-                });
-            }
-        }
+        });
 
         // Init
         loadLFLData().then(() => {
@@ -1532,13 +1075,9 @@
             renderRanking();
         });
 
-        // Auto-refresh toutes les 30 secondes
+        // Auto-refresh
         setInterval(() => {
             loadLFLData();
-            const hasLiveMatch = mockMatches.some(m => m.status === 'live');
-            if (hasLiveMatch) {
-                checkLiveMatches();
-            }
         }, 30000);
     </script>
 </body>
