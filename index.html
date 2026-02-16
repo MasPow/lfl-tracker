@@ -12,7 +12,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700;800&display=swap');
         
         * {
-            margin: 0; 
+            margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
@@ -689,18 +689,18 @@
         // Données et configuration
         let lflData = { matches: [], standings: [] };
         
-        // URLs des logos des équipes
+        // URLs des logos des équipes (Wikia)
         const TEAM_LOGOS = {
-            "KC": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1631819614211_kcorp-2021-square.png",
-            "VIT": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2FVitalityBee.png",
-            "GM": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1641580803114_Gentle_Mates.png",
-            "SLY": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1592591373422_solary-2020-square.png",
-            "BK": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1641578895436_bk_rog_square.png",
-            "GO": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1592516197821_GO-2020-square.png",
-            "BDS": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1631819769314_bds-2021-square.png",
-            "IJC": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1704188368504_icijapon.png",
-            "JL": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1704200283321_joblife_square.png",
-            "GW": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1592591766313_gameward-2020-square.png"
+            "KC": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/60/Karmine_Corplogo_square.png",
+            "VIT": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/e/e8/Team_Vitalitylogo_square.png",
+            "GM": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/f/f0/Gentle_Mateslogo_square.png",
+            "SLY": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/0/0f/Solarylogo_square.png",
+            "BK": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8c/BK_ROGlogo_square.png",
+            "GO": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/d/d4/Team_GOlogo_square.png",
+            "BDS": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/a/a1/Team_BDSlogo_square.png",
+            "IJC": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/69/Ici_Japon_Corplogo_square.png",
+            "JL": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/a/a3/JobLifelogo_square.png",
+            "GW": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/4/46/GameWardlogo_square.png"
         };
         
         let settings = {
