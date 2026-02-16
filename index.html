@@ -1082,3 +1082,55 @@
     </script>
 </body>
 </html>
+
+
+MODIFICATIONS À FAIRE DANS index.html POUR LES IMAGES :
+
+1. DANS LE CSS - Remplace le style .team-logo (ligne ~269) par :
+
+        .team-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            object-fit: contain;
+            background: var(--bg-secondary);
+            padding: 2px;
+        }
+
+2. DANS LE JAVASCRIPT - Au début du script, ajoute après "let lflData" :
+
+        const TEAM_LOGOS = {
+            "KC": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1631819614211_kcorp-2021-square.png",
+            "VIT": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2FVitalityBee.png",
+            "GM": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1641580803114_Gentle_Mates.png",
+            "SLY": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1592591373422_solary-2020-square.png",
+            "BK": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1641578895436_bk_rog_square.png",
+            "GO": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1592516197821_GO-2020-square.png",
+            "BDS": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1631819769314_bds-2021-square.png",
+            "IJC": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1704188368504_icijapon.png",
+            "JL": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1704200283321_joblife_square.png",
+            "GW": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1592591766313_gameward-2020-square.png"
+        };
+
+3. DANS renderRanking() - Remplace cette ligne :
+
+        <div class="team-logo">${team.short[0]}</div>
+
+    PAR :
+
+        <img src="${TEAM_LOGOS[team.short] || ''}" alt="${team.short}" class="team-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+        <div class="team-logo" style="display:none">${team.short[0]}</div>
+
+4. DANS renderHistory() - Remplace TOUTES les lignes :
+
+        <div class="team-logo">${match.team1[0]}</div>
+
+    PAR :
+
+        <img src="${TEAM_LOGOS[match.team1] || ''}" alt="${match.team1}" class="team-logo" onerror="this.outerHTML='<div class=team-logo>${match.team1[0]}</div>'" />
+
+    Et pareil pour team2
+
+5. SAUVEGARDE et COMMIT sur GitHub !
+
+Les images vont apparaître automatiquement ! 🔥
