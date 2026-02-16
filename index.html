@@ -269,6 +269,15 @@
         .team-logo {
             width: 32px;
             height: 32px;
+            border-radius: 8px;
+            object-fit: contain;
+            background: var(--bg-secondary);
+            padding: 2px;
+        }
+
+        .team-logo-text {
+            width: 32px;
+            height: 32px;
             background: linear-gradient(135deg, var(--accent-blue) 0%, #0066FF 100%);
             border-radius: 8px;
             display: flex;
@@ -679,6 +688,21 @@
     <script>
         // Données et configuration
         let lflData = { matches: [], standings: [] };
+        
+        // URLs des logos des équipes
+        const TEAM_LOGOS = {
+            "KC": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1631819614211_kcorp-2021-square.png",
+            "VIT": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2FVitalityBee.png",
+            "GM": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1641580803114_Gentle_Mates.png",
+            "SLY": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1592591373422_solary-2020-square.png",
+            "BK": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1641578895436_bk_rog_square.png",
+            "GO": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1592516197821_GO-2020-square.png",
+            "BDS": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1631819769314_bds-2021-square.png",
+            "IJC": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1704188368504_icijapon.png",
+            "JL": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1704200283321_joblife_square.png",
+            "GW": "https://am-a.akamaihd.net/image?resize=200:&f=http%3A%2F%2Fstatic.lolesports.com%2Fteams%2F1592591766313_gameward-2020-square.png"
+        };
+        
         let settings = {
             theme: localStorage.getItem('lfl-theme') || 'blue',
             notifications: localStorage.getItem('lfl-notifications') === 'true'
@@ -829,7 +853,7 @@
                         <div class="ranking-row">
                             <div class="rank rank-${team.rank}">${team.rank}</div>
                             <div class="team-info">
-                                <div class="team-logo">${team.short[0]}</div>
+                                <img src="${TEAM_LOGOS[team.short]}" alt="${team.short}" class="team-logo" onerror="this.outerHTML='<div class=team-logo-text>${team.short[0]}</div>'" />
                                 <div class="team-full-name">${team.team}</div>
                             </div>
                             <div class="stat">${team.wins}-${team.losses}</div>
@@ -861,12 +885,12 @@
                                 <div class="history-card">
                                     <div class="history-teams">
                                         <div class="history-team">
-                                            <div class="team-logo">${match.team1[0]}</div>
+                                            <img src="${TEAM_LOGOS[match.team1]}" alt="${match.team1}" class="team-logo" onerror="this.outerHTML='<div class=team-logo-text>${match.team1[0]}</div>'" />
                                             <div class="team-full-name">${match.team1}</div>
                                         </div>
                                         <div class="history-score">${match.score1} - ${match.score2}</div>
                                         <div class="history-team right">
-                                            <div class="team-logo">${match.team2[0]}</div>
+                                            <img src="${TEAM_LOGOS[match.team2]}" alt="${match.team2}" class="team-logo" onerror="this.outerHTML='<div class=team-logo-text>${match.team2[0]}</div>'" />
                                             <div class="team-full-name">${match.team2}</div>
                                         </div>
                                     </div>
@@ -1082,23 +1106,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-        <div class="team-logo">${team.short[0]}</div>
-
-    
-
-        <img src="${TEAM_LOGOS[team.short] || ''}" alt="${team.short}" class="team-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
-        <div class="team-logo" style="display:none">${team.short[0]}</div>
-
-
-
-        <div class="team-logo">${match.team1[0]}</div>
-
-   
-
-        <img src="${TEAM_LOGOS[match.team1] || ''}" alt="${match.team1}" class="team-logo" onerror="this.outerHTML='<div class=team-logo>${match.team1[0]}</div>'" />
-
-  
