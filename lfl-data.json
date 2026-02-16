@@ -1,199 +1,216 @@
 {
-  "last_update": "2026-02-16T21:00:00Z",
+  "last_update": "2026-02-16T19:01:45.296820Z",
   "matches": [
     {
       "team1": {
-        "name": "Karmine Corp",
-        "short": "KC",
-        "score": 2
-      },
-      "team2": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 1
-      },
-      "date": "16 Fév - 18:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Solary",
-        "short": "SLY",
-        "score": 0
-      },
-      "team2": {
         "name": "Gentle Mates",
         "short": "GM",
         "score": 2
       },
-      "date": "16 Fév - 20:00",
+      "team2": {
+        "name": "Team BDS Academy",
+        "short": "BDS",
+        "score": 0
+      },
+      "date": "28 Aug - 16:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "BK ROG",
-        "short": "BK",
+        "name": "Joblife",
+        "short": "JOB",
         "score": 1
       },
       "team2": {
-        "name": "Team GO",
-        "short": "GO",
+        "name": "Vitality.Bee",
+        "short": "VIT",
         "score": 2
       },
-      "date": "16 Fév - 21:30",
+      "date": "28 Aug - 19:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "BDS Academy",
-        "short": "BDS",
-        "score": 2
-      },
-      "team2": {
         "name": "Ici Japon Corp",
         "short": "IJC",
-        "score": 1
-      },
-      "date": "15 Fév - 18:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "JobLife",
-        "short": "JL",
-        "score": 0
+        "score": 2
       },
       "team2": {
         "name": "GameWard",
         "short": "GW",
-        "score": 2
+        "score": 0
       },
-      "date": "15 Fév - 20:00",
+      "date": "29 Aug - 16:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "Karmine Corp",
-        "short": "KC",
-        "score": 0
-      },
-      "team2": {
-        "name": "BDS Academy",
-        "short": "BDS",
-        "score": 0
-      },
-      "date": "17 Fév - 18:00",
-      "status": "scheduled"
-    },
-    {
-      "team1": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 0
+        "name": "Galions",
+        "short": "GAL",
+        "score": 2
       },
       "team2": {
         "name": "Solary",
         "short": "SLY",
         "score": 0
       },
-      "date": "17 Fév - 20:00",
-      "status": "scheduled"
+      "date": "29 Aug - 19:00",
+      "status": "finished"
     },
     {
       "team1": {
         "name": "Gentle Mates",
         "short": "GM",
+        "score": 3
+      },
+      "team2": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 0
+      },
+      "date": "02 Sep - 16:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 3
+      },
+      "team2": {
+        "name": "BK ROG Esports",
+        "short": "BK",
+        "score": 2
+      },
+      "date": "03 Sep - 16:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Karmine Corp Blue",
+        "short": "KC",
+        "score": 2
+      },
+      "team2": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 3
+      },
+      "date": "04 Sep - 16:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Gentle Mates",
+        "short": "GM",
+        "score": 3
+      },
+      "team2": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 1
+      },
+      "date": "10 Sep - 16:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Gentle Mates",
+        "short": "GM",
+        "score": 2
+      },
+      "team2": {
+        "name": "Karmine Corp Blue",
+        "short": "KC",
+        "score": 3
+      },
+      "date": "11 Sep - 16:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Galions",
+        "short": "GAL",
         "score": 0
       },
       "team2": {
-        "name": "BK ROG",
+        "name": "Karmine Corp Blue",
+        "short": "KC",
+        "score": 3
+      },
+      "date": "12 Sep - 16:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "BK ROG Esports",
         "short": "BK",
+        "score": 1
+      },
+      "team2": {
+        "name": "Zephyr Esport",
+        "short": "ZEP",
         "score": 0
       },
-      "date": "18 Fév - 18:00",
-      "status": "scheduled"
+      "date": "21 Jan - 17:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 1
+      },
+      "team2": {
+        "name": "Yumeea",
+        "short": "YUM",
+        "score": 0
+      },
+      "date": "21 Jan - 18:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "French Flair",
+        "short": "FRE",
+        "score": 1
+      },
+      "team2": {
+        "name": "Lausanne Esports",
+        "short": "LAU",
+        "score": 0
+      },
+      "date": "21 Jan - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Joblife",
+        "short": "JOB",
+        "score": 1
+      },
+      "team2": {
+        "name": "Vitality Rising Bees",
+        "short": "VIT",
+        "score": 0
+      },
+      "date": "21 Jan - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 1
+      },
+      "team2": {
+        "name": "Caldya Esport",
+        "short": "CAL",
+        "score": 0
+      },
+      "date": "21 Jan - 21:00",
+      "status": "finished"
     }
   ],
-  "standings": [
-    {
-      "rank": 1,
-      "team": "Karmine Corp",
-      "short": "KC",
-      "wins": 13,
-      "losses": 2,
-      "points": 39
-    },
-    {
-      "rank": 2,
-      "team": "Gentle Mates",
-      "short": "GM",
-      "wins": 11,
-      "losses": 4,
-      "points": 33
-    },
-    {
-      "rank": 3,
-      "team": "Vitality.Bee",
-      "short": "VIT",
-      "wins": 9,
-      "losses": 6,
-      "points": 27
-    },
-    {
-      "rank": 4,
-      "team": "Team GO",
-      "short": "GO",
-      "wins": 8,
-      "losses": 7,
-      "points": 24
-    },
-    {
-      "rank": 5,
-      "team": "BK ROG",
-      "short": "BK",
-      "wins": 7,
-      "losses": 8,
-      "points": 21
-    },
-    {
-      "rank": 6,
-      "team": "Solary",
-      "short": "SLY",
-      "wins": 7,
-      "losses": 8,
-      "points": 21
-    },
-    {
-      "rank": 7,
-      "team": "BDS Academy",
-      "short": "BDS",
-      "wins": 6,
-      "losses": 9,
-      "points": 18
-    },
-    {
-      "rank": 8,
-      "team": "Ici Japon Corp",
-      "short": "IJC",
-      "wins": 4,
-      "losses": 11,
-      "points": 12
-    },
-    {
-      "rank": 9,
-      "team": "GameWard",
-      "short": "GW",
-      "wins": 3,
-      "losses": 12,
-      "points": 9
-    },
-    {
-      "rank": 10,
-      "team": "JobLife",
-      "short": "JL",
-      "wins": 2,
-      "losses": 13,
-      "points": 6
-    }
-  ]
+  "standings": []
 }
