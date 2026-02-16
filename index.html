@@ -687,19 +687,31 @@
         // Données et configuration
         let lflData = { matches: [], standings: [] };
         
-        // URLs des logos des équipes (Wikia)
         const TEAM_LOGOS = {
-            "KC": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/60/Karmine_Corplogo_square.png",
-            "VIT": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/e/e8/Team_Vitalitylogo_square.png",
-            "GM": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/f/f0/Gentle_Mateslogo_square.png",
-            "SLY": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/0/0f/Solarylogo_square.png",
-            "BK": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/8/8c/BK_ROGlogo_square.png",
-            "GO": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/d/d4/Team_GOlogo_square.png",
-            "BDS": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/a/a1/Team_BDSlogo_square.png",
-            "IJC": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/6/69/Ici_Japon_Corplogo_square.png",
-            "JL": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/a/a3/JobLifelogo_square.png",
-            "GW": "https://static.wikia.nocookie.net/lolesports_gamepedia_en/images/4/46/GameWardlogo_square.png"
-        };
+
+    "KC": "logos/kc.png",
+
+    "VIT": "logos/vit.png",
+
+    "GM": "logos/GM.png",
+
+    "SLY": "logos/sly.png",
+
+    "BK": "logos/bk.png",
+
+    "GO": "logos/go.png",
+
+    "BDS": "logos/BDS.png",
+
+    "IJC": "logos/ijc.png",
+
+    "IJC": "logos/ijp.png",
+
+    "JL": "logos/jl.png",
+
+    "GW": "logos/GW.png"
+
+};
         
         let settings = {
             theme: localStorage.getItem('lfl-theme') || 'blue',
