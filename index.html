@@ -1019,49 +1019,49 @@
 
     <script>
         // Configuration et données
-        const mockMatches = [
-            {
-                id: 1,
-                team1: { name: 'Karmine Corp', short: 'KC', score: 2 },
-                team2: { name: 'Vitality.Bee', short: 'VIT', score: 1 },
-                date: 'Aujourd\'hui - 18:00',
-                status: 'finished'
-            },
-            {
-                id: 2,
-                team1: { name: 'Solary', short: 'SLY', score: 0 },
-                team2: { name: 'Gentle Mates', short: 'GM', score: 2 },
-                date: 'Aujourd\'hui - 20:00',
-                status: 'finished'
-            },
-            {
-                id: 3,
-                team1: { name: 'BK ROG', short: 'BK', score: 1 },
-                team2: { name: 'Team GO', short: 'GO', score: 1 },
-                date: 'En cours',
-                status: 'live'
-            },
-            {
-                id: 4,
-                team1: { name: 'BDS Academy', short: 'BDS', score: 0 },
-                team2: { name: 'Ici Japon Corp', short: 'IJC', score: 0 },
-                date: 'Demain - 18:00',
-                status: 'scheduled'
-            }
-        ];
+        let mockMatches = [];
+        let mockRanking = [];
+        let lastDataUpdate = null;
 
-        const mockRanking = [
-            { rank: 1, team: 'Karmine Corp', short: 'KC', wins: 12, losses: 2, points: 36 },
-            { rank: 2, team: 'Gentle Mates', short: 'GM', wins: 10, losses: 4, points: 30 },
-            { rank: 3, team: 'Vitality.Bee', short: 'VIT', wins: 9, losses: 5, points: 27 },
-            { rank: 4, team: 'BK ROG', short: 'BK', wins: 8, losses: 6, points: 24 },
-            { rank: 5, team: 'Solary', short: 'SLY', wins: 7, losses: 7, points: 21 },
-            { rank: 6, team: 'Team GO', short: 'GO', wins: 6, losses: 8, points: 18 },
-            { rank: 7, team: 'BDS Academy', short: 'BDS', wins: 5, losses: 9, points: 15 },
-            { rank: 8, team: 'Ici Japon Corp', short: 'IJC', wins: 4, losses: 10, points: 12 },
-            { rank: 9, team: 'JobLife', short: 'JL', wins: 3, losses: 11, points: 9 },
-            { rank: 10, team: 'GameWard', short: 'GW', wins: 2, losses: 12, points: 6 }
-        ];
+        // Charger les données depuis le JSON
+        async function loadLFLData() {
+            try {
+                const response = await fetch('lfl-data.json?t=' + Date.now());
+                const data = await response.json();
+                
+                mockMatches = data.matches || [];
+                mockRanking = data.standings || [];
+                lastDataUpdate = data.last_update;
+                
+                console.log('✅ Données LFL chargées:', {
+                    matches: mockMatches.length,
+                    standings: mockRanking.length,
+                    lastUpdate: lastDataUpdate
+                });
+                
+                // Re-render les sections actives
+                const activeSection = document.querySelector('.section.active')?.id;
+                if (activeSection === 'results-section') renderMatches();
+                if (activeSection === 'ranking-section') renderRanking();
+                
+                return true;
+            } catch (error) {
+                console.error('❌ Erreur chargement données:', error);
+                // Garder les données de fallback
+                mockMatches = [
+                    {
+                        team1: { name: 'Karmine Corp', short: 'KC', score: 2 },
+                        team2: { name: 'Vitality.Bee', short: 'VIT', score: 1 },
+                        date: 'Données en cache',
+                        status: 'finished'
+                    }
+                ];
+                mockRanking = [
+                    { rank: 1, team: 'Karmine Corp', short: 'KC', wins: 12, losses: 2, points: 36 }
+                ];
+                return false;
+            }
+        }
 
         const mockHistory = {
             'Semaine 6': [
@@ -1497,15 +1497,18 @@
         function refreshData() {
             const btn = document.querySelector('.refresh-btn');
             btn.style.transform = 'rotate(360deg)';
-            setTimeout(() => {
-                btn.style.transform = '';
-                renderMatches();
-                renderRanking();
-                const activeSection = document.querySelector('.section.active').id;
-                if (activeSection === 'history-section') renderHistory();
-                if (activeSection === 'pronostics-section') renderPronostics();
-                if (activeSection === 'settings-section') renderSettings();
-            }, 600);
+            
+            loadLFLData().then(() => {
+                setTimeout(() => {
+                    btn.style.transform = '';
+                    renderMatches();
+                    renderRanking();
+                    const activeSection = document.querySelector('.section.active').id;
+                    if (activeSection === 'history-section') renderHistory();
+                    if (activeSection === 'pronostics-section') renderPronostics();
+                    if (activeSection === 'settings-section') renderSettings();
+                }, 300);
+            });
         }
 
         // Simuler notifications pour matchs live (seulement si activé)
@@ -1524,14 +1527,16 @@
         }
 
         // Init
-        renderMatches();
-        renderRanking();
+        loadLFLData().then(() => {
+            renderMatches();
+            renderRanking();
+        });
 
-        // Auto-refresh
+        // Auto-refresh toutes les 30 secondes
         setInterval(() => {
+            loadLFLData();
             const hasLiveMatch = mockMatches.some(m => m.status === 'live');
             if (hasLiveMatch) {
-                renderMatches();
                 checkLiveMatches();
             }
         }, 30000);
