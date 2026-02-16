@@ -1,5 +1,47 @@
 {
-  "last_update": "2026-02-16T10:25:17.044244Z",
-  "matches": [],
-  "standings": []
+  "last_update": "2026-02-16T20:30:00Z",
+  "matches": [
+    {
+      "team1": {"name": "Karmine Corp", "short": "KC", "score": 2},
+      "team2": {"name": "Vitality.Bee", "short": "VIT", "score": 1},
+      "date": "16 Fév - 18:00",
+      "status": "finished"
+    },
+    {
+      "team1": {"name": "Solary", "short": "SLY", "score": 0},
+      "team2": {"name": "Gentle Mates", "short": "GM", "score": 2},
+      "date": "16 Fév - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {"name": "BK ROG", "short": "BK", "score": 1},
+      "team2": {"name": "Team GO", "short": "GO", "score": 2},
+      "date": "16 Fév - 21:30",
+      "status": "finished"
+    },
+    {
+      "team1": {"name": "BDS Academy", "short": "BDS", "score": 0},
+      "team2": {"name": "Ici Japon Corp", "short": "IJC", "score": 0},
+      "date": "17 Fév - 18:00",
+      "status": "scheduled"
+    },
+    {
+      "team1": {"name": "JobLife", "short": "JL", "score": 0},
+      "team2": {"name": "GameWard", "short": "GW", "score": 0},
+      "date": "17 Fév - 20:00",
+      "status": "scheduled"
+    }
+  ],
+  "standings": [
+    {"rank": 1, "team": "Karmine Corp", "short": "KC", "wins": 13, "losses": 2, "points": 39},
+    {"rank": 2, "team": "Gentle Mates", "short": "GM", "wins": 11, "losses": 4, "points": 33},
+    {"rank": 3, "team": "Vitality.Bee", "short": "VIT", "wins": 9, "losses": 6, "points": 27},
+    {"rank": 4, "team": "Team GO", "short": "GO", "wins": 7, "losses": 8, "points": 21},
+    {"rank": 5, "team": "BK ROG", "short": "BK", "wins": 8, "losses": 7, "points": 24},
+    {"rank": 6, "team": "Solary", "short": "SLY", "wins": 7, "losses": 8, "points": 21},
+    {"rank": 7, "team": "BDS Academy", "short": "BDS", "wins": 5, "losses": 9, "points": 15},
+    {"rank": 8, "team": "Ici Japon Corp", "short": "IJC", "wins": 4, "losses": 10, "points": 12},
+    {"rank": 9, "team": "JobLife", "short": "JL", "wins": 3, "losses": 11, "points": 9},
+    {"rank": 10, "team": "GameWard", "short": "GW", "wins": 2, "losses": 12, "points": 6}
+  ]
 }
