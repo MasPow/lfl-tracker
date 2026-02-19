@@ -1,6 +1,20 @@
 {
-  "last_update": "2026-02-19T22:03:00Z",
+  "last_update": "2026-02-19T23:48:12Z",
   "matches": [
+    {
+      "team1": {
+        "name": "Gentle Mates",
+        "short": "GM",
+        "score": 2
+      },
+      "team2": {
+        "name": "Team BDS Academy",
+        "short": "BDS",
+        "score": 0
+      },
+      "date": "28 Aug - 16:00",
+      "status": "finished"
+    },
     {
       "team1": {
         "name": "Joblife",
@@ -195,20 +209,6 @@
         "score": 0
       },
       "date": "21 Jan - 21:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 1
-      },
-      "team2": {
-        "name": "Karmine Corp Blue Stars",
-        "short": "KAR",
-        "score": 0
-      },
-      "date": "22 Jan - 17:00",
       "status": "finished"
     }
   ],
