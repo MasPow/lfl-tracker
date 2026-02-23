@@ -1,48 +1,6 @@
 {
-  "last_update": "2026-02-23T05:21:27Z",
+  "last_update": "2026-02-23T08:03:33Z",
   "matches": [
-    {
-      "team1": {
-        "name": "Galions",
-        "short": "GAL",
-        "score": 2
-      },
-      "team2": {
-        "name": "Solary",
-        "short": "SLY",
-        "score": 0
-      },
-      "date": "29 Aug - 19:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Gentle Mates",
-        "short": "GM",
-        "score": 3
-      },
-      "team2": {
-        "name": "Solary",
-        "short": "SLY",
-        "score": 0
-      },
-      "date": "02 Sep - 16:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 3
-      },
-      "team2": {
-        "name": "BK ROG Esports",
-        "short": "BK",
-        "score": 2
-      },
-      "date": "03 Sep - 16:00",
-      "status": "finished"
-    },
     {
       "team1": {
         "name": "Karmine Corp Blue",
@@ -209,6 +167,48 @@
         "score": 1
       },
       "date": "22 Jan - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Galions Sharks",
+        "short": "GAL",
+        "score": 0
+      },
+      "team2": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 1
+      },
+      "date": "22 Jan - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Project Conquerors",
+        "short": "PRO",
+        "score": 0
+      },
+      "team2": {
+        "name": "Skillcamp",
+        "short": "SKI",
+        "score": 1
+      },
+      "date": "22 Jan - 21:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Esprit Shonen",
+        "short": "ESP",
+        "score": 0
+      },
+      "team2": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 1
+      },
+      "date": "28 Jan - 17:00",
       "status": "finished"
     }
   ],
