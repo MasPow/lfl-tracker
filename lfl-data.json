@@ -1,6 +1,20 @@
 {
-  "last_update": "2026-02-24T19:56:02Z",
+  "last_update": "2026-02-24T21:53:34Z",
   "matches": [
+    {
+      "team1": {
+        "name": "Karmine Corp Blue",
+        "short": "KC",
+        "score": 2
+      },
+      "team2": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 3
+      },
+      "date": "04 Sep - 16:00",
+      "status": "finished"
+    },
     {
       "team1": {
         "name": "Gentle Mates",
@@ -195,20 +209,6 @@
         "score": 1
       },
       "date": "28 Jan - 17:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Solary",
-        "short": "SLY",
-        "score": 1
-      },
-      "team2": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 0
-      },
-      "date": "28 Jan - 18:00",
       "status": "finished"
     }
   ],
