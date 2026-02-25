@@ -5,18 +5,24 @@ Simple, robuste, avec logs pour débugger
 """
 
 import json
+import os
+import re
+import time
 from datetime import datetime
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import ProxyHandler, Request, build_opener
-import time
 
 print("=" * 50)
-print("🔥 SCRAPER LFL v2.1")
+print("🔥 SCRAPER LFL v2.2")
 print("=" * 50)
 
 # API LoL Esports publique
-HEADERS = {'x-api-key': '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z'}
+DEFAULT_API_KEYS = [
+    os.getenv('LFL_API_KEY', '').strip(),
+    # Clé historique (fallback)
+    '0TvQnueqKa5mxJntVWt0w4LpLfEkrV1Ta8rQBb9Z',
+]
 LFL_LEAGUE_ID = '105266103462388553'
 
 # Mapping des noms d'équipes
@@ -47,18 +53,49 @@ RETRY_ATTEMPTS = 3
 RETRY_DELAY_SECONDS = 1.5
 
 
-def _fetch_once(url, params, opener):
+def _fetch_once(url, params, opener, api_key):
     query = urlencode(params)
     req = Request(
         f"{url}?{query}",
         headers={
-            **HEADERS,
-            "User-Agent": "Mozilla/5.0 (compatible; LFLTrackerBot/2.1)",
+            "x-api-key": api_key,
+            "User-Agent": "Mozilla/5.0 (compatible; LFLTrackerBot/2.2)",
             "Accept": "application/json",
         },
     )
     with opener.open(req, timeout=DEFAULT_TIMEOUT) as response:
         return json.loads(response.read().decode('utf-8'))
+
+
+
+
+def discover_api_keys(openers):
+    """Tente d'extraire une clé API depuis le site officiel LoL Esports."""
+    candidates = [key for key in DEFAULT_API_KEYS if key]
+    target_url = 'https://lolesports.com/fr-FR/schedule'
+
+    for _, opener in openers:
+        try:
+            req = Request(target_url, headers={"User-Agent": "Mozilla/5.0"})
+            with opener.open(req, timeout=DEFAULT_TIMEOUT) as response:
+                html = response.read().decode('utf-8', errors='ignore')
+
+            # Exemple rencontré: "x-api-key":"..."
+            found = re.findall(r'"x-api-key"\s*:\s*"([A-Za-z0-9_-]{20,})"', html)
+            for key in found:
+                if key and key not in candidates:
+                    candidates.append(key)
+
+            if found:
+                print(f"   ℹ️ {len(found)} clé(s) API potentielle(s) trouvée(s) depuis lolesports.com")
+                break
+        except Exception:
+            continue
+
+    if not candidates:
+        raise RuntimeError("Aucune clé API disponible. Défini LFL_API_KEY dans ton environnement.")
+
+    return candidates
 
 
 def _build_openers():
@@ -74,19 +111,24 @@ def _build_openers():
 
 def fetch_json(url, params):
     last_error = None
+    openers = _build_openers()
+    api_keys = discover_api_keys(openers)
 
-    for mode, opener in _build_openers():
-        for attempt in range(1, RETRY_ATTEMPTS + 1):
-            try:
-                data = _fetch_once(url, params, opener)
-                if attempt > 1:
-                    print(f"   ℹ️ Requête OK en mode {mode} (tentative {attempt})")
-                return data
-            except (HTTPError, URLError, TimeoutError, ValueError) as error:
-                last_error = error
-                print(f"   ⚠️ Échec {mode} tentative {attempt}/{RETRY_ATTEMPTS}: {error}")
-                if attempt < RETRY_ATTEMPTS:
-                    time.sleep(RETRY_DELAY_SECONDS * attempt)
+    for api_key in api_keys:
+        key_hint = f"...{api_key[-6:]}" if len(api_key) > 6 else "(short)"
+        for mode, opener in openers:
+            for attempt in range(1, RETRY_ATTEMPTS + 1):
+                try:
+                    data = _fetch_once(url, params, opener, api_key)
+                    if attempt > 1:
+                        print(f"   ℹ️ Requête OK en mode {mode} (tentative {attempt})")
+                    print(f"   ✅ Clé API utilisée: {key_hint}")
+                    return data
+                except (HTTPError, URLError, TimeoutError, ValueError) as error:
+                    last_error = error
+                    print(f"   ⚠️ Échec clé {key_hint} | {mode} tentative {attempt}/{RETRY_ATTEMPTS}: {error}")
+                    if attempt < RETRY_ATTEMPTS:
+                        time.sleep(RETRY_DELAY_SECONDS * attempt)
 
     raise RuntimeError(f"Impossible de récupérer l'API après retries: {last_error}")
 
@@ -269,6 +311,11 @@ def main():
         standings_source = 'cache' if cached_standings else 'unavailable'
     else:
         standings_source = 'api'
+
+    # Éviter d'écraser un bon fichier avec des données totalement indisponibles
+    if matches_source == 'unavailable' and standings_source == 'unavailable' and existing_data:
+        print('⚠️ API indisponible et aucun fallback exploitable nouveau: conservation du fichier existant.')
+        return 1
 
     # Créer le fichier JSON
     lfl_data = {
