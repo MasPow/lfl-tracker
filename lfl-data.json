@@ -1,48 +1,6 @@
 {
-  "last_update": "2026-03-02T07:53:48Z",
+  "last_update": "2026-03-02T10:31:11Z",
   "matches": [
-    {
-      "team1": {
-        "name": "Karmine Corp Blue",
-        "short": "KC",
-        "score": 2
-      },
-      "team2": {
-        "name": "Galions",
-        "short": "GAL",
-        "score": 3
-      },
-      "date": "04 Sep - 16:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Gentle Mates",
-        "short": "GM",
-        "score": 3
-      },
-      "team2": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 1
-      },
-      "date": "10 Sep - 16:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Gentle Mates",
-        "short": "GM",
-        "score": 2
-      },
-      "team2": {
-        "name": "Karmine Corp Blue",
-        "short": "KC",
-        "score": 3
-      },
-      "date": "11 Sep - 16:00",
-      "status": "finished"
-    },
     {
       "team1": {
         "name": "Galions",
@@ -209,6 +167,48 @@
         "score": 1
       },
       "date": "28 Jan - 17:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 1
+      },
+      "team2": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 0
+      },
+      "date": "28 Jan - 18:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Joblife",
+        "short": "JOB",
+        "score": 0
+      },
+      "team2": {
+        "name": "TLN Pirates",
+        "short": "TLN",
+        "score": 1
+      },
+      "date": "28 Jan - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "French Flair",
+        "short": "FRE",
+        "score": 1
+      },
+      "team2": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 0
+      },
+      "date": "28 Jan - 20:00",
       "status": "finished"
     }
   ],
