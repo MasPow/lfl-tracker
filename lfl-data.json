@@ -1,6 +1,20 @@
 {
-  "last_update": "2026-04-08T15:56:33Z",
+  "last_update": "2026-04-08T17:11:21Z",
   "matches": [
+    {
+      "team1": {
+        "name": "BK ROG Esports",
+        "short": "BK",
+        "score": 0
+      },
+      "team2": {
+        "name": "Skillcamp",
+        "short": "SKI",
+        "score": 1
+      },
+      "date": "28 Jan - 21:00",
+      "status": "finished"
+    },
     {
       "team1": {
         "name": "Zephyr Esport",
@@ -195,20 +209,6 @@
         "score": 0
       },
       "date": "04 Feb - 20:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "ZYB",
-        "short": "ZYB",
-        "score": 0
-      },
-      "team2": {
-        "name": "BK ROG Esports",
-        "short": "BK",
-        "score": 1
-      },
-      "date": "04 Feb - 21:00",
       "status": "finished"
     }
   ],
