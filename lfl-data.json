@@ -1,10 +1,24 @@
 {
-  "last_update": "2026-04-13T06:32:24Z",
+  "last_update": "2026-04-13T08:35:16Z",
   "matches": [
     {
       "team1": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 0
+      },
+      "team2": {
         "name": "BK ROG Esports",
         "short": "BK",
+        "score": 1
+      },
+      "date": "04 Feb - 21:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Lille Esport",
+        "short": "LIL",
         "score": 0
       },
       "team2": {
@@ -12,147 +26,7 @@
         "short": "SKI",
         "score": 1
       },
-      "date": "28 Jan - 21:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Zephyr Esport",
-        "short": "ZEP",
-        "score": 0
-      },
-      "team2": {
-        "name": "Project Conquerors",
-        "short": "PRO",
-        "score": 1
-      },
-      "date": "29 Jan - 17:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Lille Esport",
-        "short": "LIL",
-        "score": 1
-      },
-      "team2": {
-        "name": "Caldya Esport",
-        "short": "CAL",
-        "score": 0
-      },
-      "date": "29 Jan - 18:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Ici Japon Corp",
-        "short": "IJC",
-        "score": 1
-      },
-      "team2": {
-        "name": "Vitality Rising Bees",
-        "short": "VIT",
-        "score": 0
-      },
-      "date": "29 Jan - 19:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Karmine Corp Blue Stars",
-        "short": "KAR",
-        "score": 1
-      },
-      "team2": {
-        "name": "Yumeea",
-        "short": "YUM",
-        "score": 0
-      },
-      "date": "29 Jan - 20:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Lausanne Esports",
-        "short": "LAU",
-        "score": 1
-      },
-      "team2": {
-        "name": "Galions Sharks",
-        "short": "GAL",
-        "score": 0
-      },
-      "date": "29 Jan - 21:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Project Conquerors",
-        "short": "PRO",
-        "score": 0
-      },
-      "team2": {
-        "name": "BK ROG Esports",
-        "short": "BK",
-        "score": 1
-      },
-      "date": "30 Jan - 17:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Joblife",
-        "short": "JOB",
-        "score": 1
-      },
-      "team2": {
-        "name": "Ici Japon Corp",
-        "short": "IJC",
-        "score": 0
-      },
-      "date": "30 Jan - 18:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Lille Esport",
-        "short": "LIL",
-        "score": 1
-      },
-      "team2": {
-        "name": "Esprit Shonen",
-        "short": "ESP",
-        "score": 0
-      },
-      "date": "30 Jan - 19:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Lausanne Esports",
-        "short": "LAU",
-        "score": 0
-      },
-      "team2": {
-        "name": "ZYB",
-        "short": "ZYB",
-        "score": 1
-      },
-      "date": "30 Jan - 20:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 1
-      },
-      "team2": {
-        "name": "Karmine Corp Blue Stars",
-        "short": "KAR",
-        "score": 0
-      },
-      "date": "30 Jan - 21:00",
+      "date": "05 Feb - 17:00",
       "status": "finished"
     },
     {
@@ -162,31 +36,73 @@
         "score": 0
       },
       "team2": {
-        "name": "Galions",
-        "short": "GAL",
+        "name": "French Flair",
+        "short": "FRE",
         "score": 1
       },
-      "date": "04 Feb - 17:00",
+      "date": "05 Feb - 18:00",
       "status": "finished"
     },
     {
       "team1": {
         "name": "Solary",
         "short": "SLY",
-        "score": 0
-      },
-      "team2": {
-        "name": "Skillcamp",
-        "short": "SKI",
         "score": 1
       },
-      "date": "04 Feb - 18:00",
+      "team2": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 0
+      },
+      "date": "05 Feb - 19:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "French Flair",
-        "short": "FRE",
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 0
+      },
+      "team2": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 1
+      },
+      "date": "05 Feb - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "BK ROG Esports",
+        "short": "BK",
+        "score": 0
+      },
+      "team2": {
+        "name": "Joblife",
+        "short": "JOB",
+        "score": 1
+      },
+      "date": "05 Feb - 21:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 1
+      },
+      "team2": {
+        "name": "BK ROG Esports",
+        "short": "BK",
+        "score": 0
+      },
+      "date": "06 Feb - 17:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
         "score": 0
       },
       "team2": {
@@ -194,7 +110,63 @@
         "short": "LIL",
         "score": 1
       },
-      "date": "04 Feb - 19:00",
+      "date": "06 Feb - 18:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Joblife",
+        "short": "JOB",
+        "score": 0
+      },
+      "team2": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 1
+      },
+      "date": "06 Feb - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Skillcamp",
+        "short": "SKI",
+        "score": 1
+      },
+      "team2": {
+        "name": "French Flair",
+        "short": "FRE",
+        "score": 0
+      },
+      "date": "06 Feb - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 0
+      },
+      "team2": {
+        "name": "TLN Pirates",
+        "short": "TLN",
+        "score": 1
+      },
+      "date": "06 Feb - 21:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "BK ROG Esports",
+        "short": "BK",
+        "score": 1
+      },
+      "team2": {
+        "name": "Lille Esport",
+        "short": "LIL",
+        "score": 0
+      },
+      "date": "10 Feb - 17:00",
       "status": "finished"
     },
     {
@@ -204,11 +176,39 @@
         "score": 1
       },
       "team2": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
+        "name": "TLN Pirates",
+        "short": "TLN",
         "score": 0
       },
-      "date": "04 Feb - 20:00",
+      "date": "10 Feb - 18:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 1
+      },
+      "team2": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 0
+      },
+      "date": "10 Feb - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "French Flair",
+        "short": "FRE",
+        "score": 1
+      },
+      "team2": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 0
+      },
+      "date": "10 Feb - 20:00",
       "status": "finished"
     }
   ],
