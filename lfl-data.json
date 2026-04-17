@@ -1,20 +1,6 @@
 {
-  "last_update": "2026-04-17T13:49:32Z",
+  "last_update": "2026-04-17T14:57:02Z",
   "matches": [
-    {
-      "team1": {
-        "name": "ZYB",
-        "short": "ZYB",
-        "score": 0
-      },
-      "team2": {
-        "name": "BK ROG Esports",
-        "short": "BK",
-        "score": 1
-      },
-      "date": "04 Feb - 21:00",
-      "status": "finished"
-    },
     {
       "team1": {
         "name": "Lille Esport",
@@ -209,6 +195,20 @@
         "score": 0
       },
       "date": "10 Feb - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 0
+      },
+      "team2": {
+        "name": "Skillcamp",
+        "short": "SKI",
+        "score": 1
+      },
+      "date": "10 Feb - 21:00",
       "status": "finished"
     }
   ],
