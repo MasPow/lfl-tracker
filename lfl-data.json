@@ -1,6 +1,20 @@
 {
-  "last_update": "2026-04-23T20:39:00Z",
+  "last_update": "2026-04-23T21:30:53Z",
   "matches": [
+    {
+      "team1": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 0
+      },
+      "team2": {
+        "name": "TLN Pirates",
+        "short": "TLN",
+        "score": 1
+      },
+      "date": "06 Feb - 21:00",
+      "status": "finished"
+    },
     {
       "team1": {
         "name": "BK ROG Esports",
@@ -195,20 +209,6 @@
         "score": 0
       },
       "date": "12 Feb - 20:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Lille Esport",
-        "short": "LIL",
-        "score": 0
-      },
-      "team2": {
-        "name": "TLN Pirates",
-        "short": "TLN",
-        "score": 1
-      },
-      "date": "12 Feb - 21:00",
       "status": "finished"
     }
   ],
