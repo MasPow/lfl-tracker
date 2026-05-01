@@ -1,20 +1,6 @@
 {
-  "last_update": "2026-05-01T20:04:47Z",
+  "last_update": "2026-05-01T21:07:48Z",
   "matches": [
-    {
-      "team1": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 0
-      },
-      "team2": {
-        "name": "Skillcamp",
-        "short": "SKI",
-        "score": 1
-      },
-      "date": "10 Feb - 21:00",
-      "status": "finished"
-    },
     {
       "team1": {
         "name": "BK ROG Esports",
@@ -209,6 +195,20 @@
         "score": 1
       },
       "date": "13 Feb - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "French Flair",
+        "short": "FRE",
+        "score": 1
+      },
+      "team2": {
+        "name": "BK ROG Esports",
+        "short": "BK",
+        "score": 0
+      },
+      "date": "13 Feb - 21:00",
       "status": "finished"
     }
   ],
