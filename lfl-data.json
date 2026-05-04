@@ -1,62 +1,6 @@
 {
-  "last_update": "2026-05-04T04:09:16Z",
+  "last_update": "2026-05-04T07:24:22Z",
   "matches": [
-    {
-      "team1": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 0
-      },
-      "team2": {
-        "name": "Skillcamp",
-        "short": "SKI",
-        "score": 1
-      },
-      "date": "10 Feb - 21:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "BK ROG Esports",
-        "short": "BK",
-        "score": 1
-      },
-      "team2": {
-        "name": "Skillcamp",
-        "short": "SKI",
-        "score": 0
-      },
-      "date": "11 Feb - 17:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Solary",
-        "short": "SLY",
-        "score": 1
-      },
-      "team2": {
-        "name": "TLN Pirates",
-        "short": "TLN",
-        "score": 0
-      },
-      "date": "11 Feb - 18:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Galions",
-        "short": "GAL",
-        "score": 1
-      },
-      "team2": {
-        "name": "Lille Esport",
-        "short": "LIL",
-        "score": 0
-      },
-      "date": "11 Feb - 19:00",
-      "status": "finished"
-    },
     {
       "team1": {
         "name": "Joblife",
@@ -209,6 +153,62 @@
         "score": 1
       },
       "date": "13 Feb - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "French Flair",
+        "short": "FRE",
+        "score": 1
+      },
+      "team2": {
+        "name": "BK ROG Esports",
+        "short": "BK",
+        "score": 0
+      },
+      "date": "13 Feb - 21:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 1
+      },
+      "team2": {
+        "name": "BK ROG Esports",
+        "short": "BK",
+        "score": 0
+      },
+      "date": "18 Feb - 17:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 0
+      },
+      "team2": {
+        "name": "TLN Pirates",
+        "short": "TLN",
+        "score": 1
+      },
+      "date": "18 Feb - 18:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Lille Esport",
+        "short": "LIL",
+        "score": 0
+      },
+      "team2": {
+        "name": "Joblife",
+        "short": "JOB",
+        "score": 1
+      },
+      "date": "18 Feb - 19:00",
       "status": "finished"
     }
   ],
