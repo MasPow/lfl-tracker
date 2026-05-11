@@ -1,34 +1,6 @@
 {
-  "last_update": "2026-05-11T08:17:05Z",
+  "last_update": "2026-05-11T11:41:42Z",
   "matches": [
-    {
-      "team1": {
-        "name": "Joblife",
-        "short": "JOB",
-        "score": 1
-      },
-      "team2": {
-        "name": "ZYB",
-        "short": "ZYB",
-        "score": 0
-      },
-      "date": "11 Feb - 20:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "French Flair",
-        "short": "FRE",
-        "score": 1
-      },
-      "team2": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 0
-      },
-      "date": "11 Feb - 21:00",
-      "status": "finished"
-    },
     {
       "team1": {
         "name": "BK ROG Esports",
@@ -209,6 +181,34 @@
         "score": 1
       },
       "date": "18 Feb - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 0
+      },
+      "team2": {
+        "name": "French Flair",
+        "short": "FRE",
+        "score": 1
+      },
+      "date": "18 Feb - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 1
+      },
+      "team2": {
+        "name": "Skillcamp",
+        "short": "SKI",
+        "score": 0
+      },
+      "date": "18 Feb - 21:00",
       "status": "finished"
     }
   ],
