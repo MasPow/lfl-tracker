@@ -1,6 +1,20 @@
 {
-  "last_update": "2026-05-13T15:24:16Z",
+  "last_update": "2026-05-13T17:35:16Z",
   "matches": [
+    {
+      "team1": {
+        "name": "BK ROG Esports",
+        "short": "BK",
+        "score": 1
+      },
+      "team2": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 0
+      },
+      "date": "12 Feb - 17:00",
+      "status": "finished"
+    },
     {
       "team1": {
         "name": "Solary",
@@ -195,20 +209,6 @@
         "score": 0
       },
       "date": "18 Feb - 21:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "TLN Pirates",
-        "short": "TLN",
-        "score": 1
-      },
-      "team2": {
-        "name": "BK ROG Esports",
-        "short": "BK",
-        "score": 0
-      },
-      "date": "19 Feb - 17:00",
       "status": "finished"
     }
   ],
