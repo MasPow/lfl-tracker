@@ -1,62 +1,6 @@
 {
-  "last_update": "2026-05-18T04:41:53Z",
+  "last_update": "2026-05-18T08:36:58Z",
   "matches": [
-    {
-      "team1": {
-        "name": "BK ROG Esports",
-        "short": "BK",
-        "score": 1
-      },
-      "team2": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 0
-      },
-      "date": "12 Feb - 17:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Solary",
-        "short": "SLY",
-        "score": 1
-      },
-      "team2": {
-        "name": "ZYB",
-        "short": "ZYB",
-        "score": 0
-      },
-      "date": "12 Feb - 18:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "French Flair",
-        "short": "FRE",
-        "score": 0
-      },
-      "team2": {
-        "name": "Joblife",
-        "short": "JOB",
-        "score": 1
-      },
-      "date": "12 Feb - 19:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Galions",
-        "short": "GAL",
-        "score": 1
-      },
-      "team2": {
-        "name": "Skillcamp",
-        "short": "SKI",
-        "score": 0
-      },
-      "date": "12 Feb - 20:00",
-      "status": "finished"
-    },
     {
       "team1": {
         "name": "Lille Esport",
@@ -209,6 +153,62 @@
         "score": 0
       },
       "date": "18 Feb - 21:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "TLN Pirates",
+        "short": "TLN",
+        "score": 1
+      },
+      "team2": {
+        "name": "BK ROG Esports",
+        "short": "BK",
+        "score": 0
+      },
+      "date": "19 Feb - 17:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 1
+      },
+      "team2": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 0
+      },
+      "date": "19 Feb - 18:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Lille Esport",
+        "short": "LIL",
+        "score": 0
+      },
+      "team2": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 1
+      },
+      "date": "19 Feb - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "French Flair",
+        "short": "FRE",
+        "score": 1
+      },
+      "team2": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 0
+      },
+      "date": "19 Feb - 20:00",
       "status": "finished"
     }
   ],
