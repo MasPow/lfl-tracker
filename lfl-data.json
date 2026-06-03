@@ -1,6 +1,20 @@
 {
-  "last_update": "2026-06-03T15:16:13Z",
+  "last_update": "2026-06-03T19:07:13Z",
   "matches": [
+    {
+      "team1": {
+        "name": "Joblife",
+        "short": "JOB",
+        "score": 0
+      },
+      "team2": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 1
+      },
+      "date": "13 Feb - 20:00",
+      "status": "finished"
+    },
     {
       "team1": {
         "name": "French Flair",
@@ -195,20 +209,6 @@
         "score": 1
       },
       "date": "20 Feb - 15:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "French Flair",
-        "short": "FRE",
-        "score": 3
-      },
-      "team2": {
-        "name": "Skillcamp",
-        "short": "SKI",
-        "score": 0
-      },
-      "date": "24 Feb - 17:00",
       "status": "finished"
     }
   ],
