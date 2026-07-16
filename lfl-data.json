@@ -1,212 +1,212 @@
 {
-  "last_update": "2026-07-16T17:52:45Z",
+  "last_update": "2026-07-16T19:12:47Z",
   "matches": [
     {
       "team1": {
-        "name": "Joblife",
-        "short": "JOB",
-        "score": 0
-      },
-      "team2": {
         "name": "Solary",
         "short": "SLY",
         "score": 1
+      },
+      "team2": {
+        "name": "Joblife",
+        "short": "JOB",
+        "score": 0
       },
       "date": "13 Feb - 20:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "French Flair",
-        "short": "FRE",
-        "score": 1
-      },
-      "team2": {
         "name": "BK ROG Esports",
         "short": "BK",
         "score": 0
+      },
+      "team2": {
+        "name": "French Flair",
+        "short": "FRE",
+        "score": 1
       },
       "date": "13 Feb - 21:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "Galions",
-        "short": "GAL",
-        "score": 1
-      },
-      "team2": {
         "name": "BK ROG Esports",
         "short": "BK",
         "score": 0
+      },
+      "team2": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 1
       },
       "date": "18 Feb - 17:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 0
-      },
-      "team2": {
         "name": "TLN Pirates",
         "short": "TLN",
         "score": 1
+      },
+      "team2": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 0
       },
       "date": "18 Feb - 18:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "Lille Esport",
-        "short": "LIL",
-        "score": 0
-      },
-      "team2": {
         "name": "Joblife",
         "short": "JOB",
         "score": 1
+      },
+      "team2": {
+        "name": "Lille Esport",
+        "short": "LIL",
+        "score": 0
       },
       "date": "18 Feb - 19:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "Solary",
-        "short": "SLY",
-        "score": 0
-      },
-      "team2": {
         "name": "French Flair",
         "short": "FRE",
         "score": 1
+      },
+      "team2": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 0
       },
       "date": "18 Feb - 20:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "ZYB",
-        "short": "ZYB",
-        "score": 1
-      },
-      "team2": {
         "name": "Skillcamp",
         "short": "SKI",
         "score": 0
+      },
+      "team2": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 1
       },
       "date": "18 Feb - 21:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "TLN Pirates",
-        "short": "TLN",
-        "score": 1
-      },
-      "team2": {
         "name": "BK ROG Esports",
         "short": "BK",
         "score": 0
+      },
+      "team2": {
+        "name": "TLN Pirates",
+        "short": "TLN",
+        "score": 1
       },
       "date": "19 Feb - 17:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "ZYB",
-        "short": "ZYB",
-        "score": 1
-      },
-      "team2": {
         "name": "Vitality.Bee",
         "short": "VIT",
         "score": 0
+      },
+      "team2": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 1
       },
       "date": "19 Feb - 18:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "Lille Esport",
-        "short": "LIL",
-        "score": 0
-      },
-      "team2": {
         "name": "Solary",
         "short": "SLY",
         "score": 1
+      },
+      "team2": {
+        "name": "Lille Esport",
+        "short": "LIL",
+        "score": 0
       },
       "date": "19 Feb - 19:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "French Flair",
-        "short": "FRE",
-        "score": 1
-      },
-      "team2": {
         "name": "Galions",
         "short": "GAL",
         "score": 0
+      },
+      "team2": {
+        "name": "French Flair",
+        "short": "FRE",
+        "score": 1
       },
       "date": "19 Feb - 20:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "Joblife",
-        "short": "JOB",
-        "score": 0
-      },
-      "team2": {
         "name": "Skillcamp",
         "short": "SKI",
         "score": 1
+      },
+      "team2": {
+        "name": "Joblife",
+        "short": "JOB",
+        "score": 0
       },
       "date": "19 Feb - 21:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "French Flair",
-        "short": "FRE",
-        "score": 1
-      },
-      "team2": {
         "name": "Joblife",
         "short": "JOB",
         "score": 0
+      },
+      "team2": {
+        "name": "French Flair",
+        "short": "FRE",
+        "score": 1
       },
       "date": "20 Feb - 13:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "French Flair",
-        "short": "FRE",
-        "score": 0
-      },
-      "team2": {
         "name": "Galions",
         "short": "GAL",
         "score": 1
+      },
+      "team2": {
+        "name": "French Flair",
+        "short": "FRE",
+        "score": 0
       },
       "date": "20 Feb - 14:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "Joblife",
-        "short": "JOB",
-        "score": 0
-      },
-      "team2": {
         "name": "Galions",
         "short": "GAL",
         "score": 1
+      },
+      "team2": {
+        "name": "Joblife",
+        "short": "JOB",
+        "score": 0
       },
       "date": "20 Feb - 15:00",
       "status": "finished"
