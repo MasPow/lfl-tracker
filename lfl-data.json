@@ -1,116 +1,32 @@
 {
-  "last_update": "2026-07-24T13:06:42Z",
+  "last_update": "2026-07-24T15:06:21Z",
   "matches": [
     {
       "team1": {
+        "name": "Ici Japon Corp",
+        "short": "IJC",
+        "score": 1
+      },
+      "team2": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 0
+      },
+      "date": "09 Apr - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 1
+      },
+      "team2": {
         "name": "Skillcamp",
         "short": "SKI",
         "score": 0
       },
-      "team2": {
-        "name": "French Flair",
-        "short": "FRE",
-        "score": 3
-      },
-      "date": "24 Feb - 17:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Joblife",
-        "short": "JOB",
-        "score": 2
-      },
-      "team2": {
-        "name": "TLN Pirates",
-        "short": "TLN",
-        "score": 3
-      },
-      "date": "25 Feb - 17:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Solary",
-        "short": "SLY",
-        "score": 3
-      },
-      "team2": {
-        "name": "Galions",
-        "short": "GAL",
-        "score": 1
-      },
-      "date": "26 Feb - 17:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "French Flair",
-        "short": "FRE",
-        "score": 3
-      },
-      "team2": {
-        "name": "TLN Pirates",
-        "short": "TLN",
-        "score": 1
-      },
-      "date": "04 Mar - 17:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Galions",
-        "short": "GAL",
-        "score": 3
-      },
-      "team2": {
-        "name": "French Flair",
-        "short": "FRE",
-        "score": 2
-      },
-      "date": "05 Mar - 17:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Galions",
-        "short": "GAL",
-        "score": 0
-      },
-      "team2": {
-        "name": "Solary",
-        "short": "SLY",
-        "score": 3
-      },
-      "date": "06 Mar - 17:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Skillcamp",
-        "short": "SKI",
-        "score": 0
-      },
-      "team2": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 1
-      },
-      "date": "08 Apr - 16:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Esprit Shonen",
-        "short": "ESP",
-        "score": 1
-      },
-      "team2": {
-        "name": "Joblife",
-        "short": "JOB",
-        "score": 0
-      },
-      "date": "08 Apr - 17:00",
+      "date": "10 Apr - 16:00",
       "status": "finished"
     },
     {
@@ -120,45 +36,143 @@
         "score": 0
       },
       "team2": {
-        "name": "ZYB",
-        "short": "ZYB",
-        "score": 1
-      },
-      "date": "08 Apr - 18:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Solary",
-        "short": "SLY",
-        "score": 0
-      },
-      "team2": {
-        "name": "Galions",
-        "short": "GAL",
-        "score": 1
-      },
-      "date": "08 Apr - 19:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Karmine Corp Blue",
-        "short": "KC",
-        "score": 0
-      },
-      "team2": {
         "name": "TLN Pirates",
         "short": "TLN",
         "score": 1
       },
-      "date": "08 Apr - 20:00",
+      "date": "10 Apr - 17:00",
       "status": "finished"
     },
     {
       "team1": {
         "name": "Esprit Shonen",
         "short": "ESP",
+        "score": 0
+      },
+      "team2": {
+        "name": "Karmine Corp Blue",
+        "short": "KC",
+        "score": 1
+      },
+      "date": "10 Apr - 18:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 1
+      },
+      "team2": {
+        "name": "Joblife",
+        "short": "JOB",
+        "score": 0
+      },
+      "date": "10 Apr - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 0
+      },
+      "team2": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 1
+      },
+      "date": "10 Apr - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "TLN Pirates",
+        "short": "TLN",
+        "score": 1
+      },
+      "team2": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 0
+      },
+      "date": "15 Apr - 16:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Esprit Shonen",
+        "short": "ESP",
+        "score": 0
+      },
+      "team2": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 1
+      },
+      "date": "15 Apr - 17:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 1
+      },
+      "team2": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 0
+      },
+      "date": "15 Apr - 18:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Ici Japon Corp",
+        "short": "IJC",
+        "score": 0
+      },
+      "team2": {
+        "name": "Joblife",
+        "short": "JOB",
+        "score": 1
+      },
+      "date": "15 Apr - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Skillcamp",
+        "short": "SKI",
+        "score": 0
+      },
+      "team2": {
+        "name": "Karmine Corp Blue",
+        "short": "KC",
+        "score": 1
+      },
+      "date": "15 Apr - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Esprit Shonen",
+        "short": "ESP",
+        "score": 0
+      },
+      "team2": {
+        "name": "Ici Japon Corp",
+        "short": "IJC",
+        "score": 1
+      },
+      "date": "16 Apr - 16:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Galions",
+        "short": "GAL",
         "score": 1
       },
       "team2": {
@@ -166,21 +180,21 @@
         "short": "SKI",
         "score": 0
       },
-      "date": "09 Apr - 16:00",
+      "date": "16 Apr - 17:00",
       "status": "finished"
     },
     {
       "team1": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
+        "name": "ZYB",
+        "short": "ZYB",
         "score": 1
       },
       "team2": {
-        "name": "ZYB",
-        "short": "ZYB",
+        "name": "TLN Pirates",
+        "short": "TLN",
         "score": 0
       },
-      "date": "09 Apr - 17:00",
+      "date": "16 Apr - 18:00",
       "status": "finished"
     },
     {
@@ -190,25 +204,11 @@
         "score": 1
       },
       "team2": {
-        "name": "TLN Pirates",
-        "short": "TLN",
-        "score": 0
-      },
-      "date": "09 Apr - 18:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Joblife",
-        "short": "JOB",
-        "score": 0
-      },
-      "team2": {
         "name": "Karmine Corp Blue",
         "short": "KC",
-        "score": 1
+        "score": 0
       },
-      "date": "09 Apr - 19:00",
+      "date": "16 Apr - 19:00",
       "status": "finished"
     }
   ],
