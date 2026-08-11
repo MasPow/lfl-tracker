@@ -1,62 +1,6 @@
 {
-  "last_update": "2026-08-11T13:15:17Z",
+  "last_update": "2026-08-11T14:32:00Z",
   "matches": [
-    {
-      "team1": {
-        "name": "Joblife",
-        "short": "JOB",
-        "score": 0
-      },
-      "team2": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 1
-      },
-      "date": "16 Apr - 20:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Solary",
-        "short": "SLY",
-        "score": 1
-      },
-      "team2": {
-        "name": "Skillcamp",
-        "short": "SKI",
-        "score": 0
-      },
-      "date": "17 Apr - 16:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Galions",
-        "short": "GAL",
-        "score": 0
-      },
-      "team2": {
-        "name": "TLN Pirates",
-        "short": "TLN",
-        "score": 1
-      },
-      "date": "17 Apr - 17:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Ici Japon Corp",
-        "short": "IJC",
-        "score": 1
-      },
-      "team2": {
-        "name": "Karmine Corp Blue",
-        "short": "KC",
-        "score": 0
-      },
-      "date": "17 Apr - 18:00",
-      "status": "finished"
-    },
     {
       "team1": {
         "name": "ZYB",
@@ -209,6 +153,62 @@
         "score": 0
       },
       "date": "23 Apr - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 0
+      },
+      "team2": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 1
+      },
+      "date": "23 Apr - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Esprit Shonen",
+        "short": "ESP",
+        "score": 0
+      },
+      "team2": {
+        "name": "TLN Pirates",
+        "short": "TLN",
+        "score": 1
+      },
+      "date": "01 May - 16:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Skillcamp",
+        "short": "SKI",
+        "score": 1
+      },
+      "team2": {
+        "name": "Joblife",
+        "short": "JOB",
+        "score": 0
+      },
+      "date": "01 May - 17:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Ici Japon Corp",
+        "short": "IJC",
+        "score": 0
+      },
+      "team2": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 1
+      },
+      "date": "01 May - 18:00",
       "status": "finished"
     }
   ],
