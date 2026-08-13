@@ -1,20 +1,6 @@
 {
-  "last_update": "2026-08-13T14:58:09Z",
+  "last_update": "2026-08-13T16:03:17Z",
   "matches": [
-    {
-      "team1": {
-        "name": "ZYB",
-        "short": "ZYB",
-        "score": 0
-      },
-      "team2": {
-        "name": "Joblife",
-        "short": "JOB",
-        "score": 1
-      },
-      "date": "17 Apr - 19:00",
-      "status": "finished"
-    },
     {
       "team1": {
         "name": "Esprit Shonen",
@@ -209,6 +195,20 @@
         "score": 1
       },
       "date": "01 May - 18:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 0
+      },
+      "team2": {
+        "name": "Karmine Corp Blue",
+        "short": "KC",
+        "score": 1
+      },
+      "date": "01 May - 19:00",
       "status": "finished"
     }
   ],
