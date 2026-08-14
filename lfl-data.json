@@ -1,62 +1,6 @@
 {
-  "last_update": "2026-08-14T11:57:15Z",
+  "last_update": "2026-08-14T13:21:01Z",
   "matches": [
-    {
-      "team1": {
-        "name": "ZYB",
-        "short": "ZYB",
-        "score": 0
-      },
-      "team2": {
-        "name": "Joblife",
-        "short": "JOB",
-        "score": 1
-      },
-      "date": "17 Apr - 19:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Esprit Shonen",
-        "short": "ESP",
-        "score": 0
-      },
-      "team2": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 1
-      },
-      "date": "17 Apr - 20:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Skillcamp",
-        "short": "SKI",
-        "score": 0
-      },
-      "team2": {
-        "name": "TLN Pirates",
-        "short": "TLN",
-        "score": 1
-      },
-      "date": "22 Apr - 16:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Karmine Corp Blue",
-        "short": "KC",
-        "score": 1
-      },
-      "team2": {
-        "name": "Vitality.Bee",
-        "short": "VIT",
-        "score": 0
-      },
-      "date": "22 Apr - 17:00",
-      "status": "finished"
-    },
     {
       "team1": {
         "name": "Ici Japon Corp",
@@ -209,6 +153,62 @@
         "score": 1
       },
       "date": "01 May - 18:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 0
+      },
+      "team2": {
+        "name": "Karmine Corp Blue",
+        "short": "KC",
+        "score": 1
+      },
+      "date": "01 May - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 0
+      },
+      "team2": {
+        "name": "Solary",
+        "short": "SLY",
+        "score": 1
+      },
+      "date": "01 May - 20:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Esprit Shonen",
+        "short": "ESP",
+        "score": 0
+      },
+      "team2": {
+        "name": "TLN Pirates",
+        "short": "TLN",
+        "score": 2
+      },
+      "date": "06 May - 16:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Karmine Corp Blue",
+        "short": "KC",
+        "score": 2
+      },
+      "team2": {
+        "name": "Ici Japon Corp",
+        "short": "IJC",
+        "score": 0
+      },
+      "date": "06 May - 19:00",
       "status": "finished"
     }
   ],
