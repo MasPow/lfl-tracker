@@ -1,20 +1,6 @@
 {
-  "last_update": "2026-08-19T18:47:06Z",
+  "last_update": "2026-08-19T19:25:52Z",
   "matches": [
-    {
-      "team1": {
-        "name": "Ici Japon Corp",
-        "short": "IJC",
-        "score": 0
-      },
-      "team2": {
-        "name": "Solary",
-        "short": "SLY",
-        "score": 1
-      },
-      "date": "22 Apr - 18:00",
-      "status": "finished"
-    },
     {
       "team1": {
         "name": "Galions",
@@ -209,6 +195,20 @@
         "score": 0
       },
       "date": "06 May - 19:00",
+      "status": "finished"
+    },
+    {
+      "team1": {
+        "name": "Galions",
+        "short": "GAL",
+        "score": 2
+      },
+      "team2": {
+        "name": "Vitality.Bee",
+        "short": "VIT",
+        "score": 0
+      },
+      "date": "07 May - 16:00",
       "status": "finished"
     }
   ],
