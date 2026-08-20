@@ -1,6 +1,20 @@
 {
-  "last_update": "2026-08-20T15:34:18Z",
+  "last_update": "2026-08-20T16:04:43Z",
   "matches": [
+    {
+      "team1": {
+        "name": "Karmine Corp Blue",
+        "short": "KC",
+        "score": 1
+      },
+      "team2": {
+        "name": "ZYB",
+        "short": "ZYB",
+        "score": 0
+      },
+      "date": "23 Apr - 19:00",
+      "status": "finished"
+    },
     {
       "team1": {
         "name": "Vitality.Bee",
@@ -195,20 +209,6 @@
         "score": 2
       },
       "date": "20 May - 19:00",
-      "status": "finished"
-    },
-    {
-      "team1": {
-        "name": "Esprit Shonen",
-        "short": "ESP",
-        "score": 0
-      },
-      "team2": {
-        "name": "Galions",
-        "short": "GAL",
-        "score": 2
-      },
-      "date": "21 May - 16:00",
       "status": "finished"
     }
   ],
