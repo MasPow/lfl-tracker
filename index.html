@@ -175,10 +175,16 @@
             text-align: center;
         }
 
+        .team-identity {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
         .team-name {
             font-size: 16px;
             font-weight: 700;
-            margin-bottom: 4px;
         }
 
         .team-score {
@@ -685,7 +691,7 @@
 
     <script>
         // Données et configuration
-        let lflData = { matches: [], standings: [] };
+        let lflData = { matches: [], standings: [], lastUpdate: null };
         
         const TEAM_LOGOS = {
 
@@ -702,8 +708,6 @@
     "GO": "logos/go.png",
 
     "BDS": "logos/BDS.png",
-
-    "IJC": "logos/ijc.png",
 
     "IJC": "logos/ijp.png",
 
@@ -737,13 +741,57 @@
             ]
         };
 
+        function getTeamLogoHtml(teamShort) {
+            const logo = TEAM_LOGOS[teamShort];
+            if (!logo) {
+                return `<div class="team-logo-text">${(teamShort || '?')[0]}</div>`;
+            }
+            return `<img src="${logo}" alt="${teamShort}" class="team-logo" onerror="this.outerHTML='<div class=team-logo-text>${(teamShort || '?')[0]}</div>'" />`;
+        }
+
+        function formatDateLabel(isoDate, fallback = 'TBD') {
+            if (!isoDate) return fallback;
+            const date = new Date(isoDate);
+            if (Number.isNaN(date.getTime())) return fallback;
+
+            const dayMonth = new Intl.DateTimeFormat('fr-FR', {
+                day: '2-digit',
+                month: 'short',
+                timeZone: 'Europe/Paris'
+            }).format(date).replace('.', '');
+
+            const hour = new Intl.DateTimeFormat('fr-FR', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false,
+                timeZone: 'Europe/Paris'
+            }).format(date);
+
+            return `${dayMonth} - ${hour}`;
+        }
+
+        function refreshVisibleSections() {
+            renderMatches();
+            renderRanking();
+            if (document.getElementById('history-section').classList.contains('active')) {
+                renderHistory();
+            }
+            if (document.getElementById('patchnotes-section').classList.contains('active')) {
+                renderPatchnotes();
+            }
+        }
+
 
         // Charger données
         async function loadLFLData() {
             try {
                 const response = await fetch('lfl-data.json?t=' + Date.now());
                 const data = await response.json();
-                lflData.matches = data.matches || [];
+                lflData.lastUpdate = data.last_update || null;
+                lflData.matches = (data.matches || []).map(match => ({
+                    ...match,
+                    date: formatDateLabel(match.startTime || match.date_iso, match.date || 'TBD')
+                }));
                 lflData.standings = data.standings || [];
                 console.log('✅ Données chargées');
                 return true;
@@ -753,6 +801,7 @@
                     {
                         team1: { name: 'Karmine Corp', short: 'KC', score: 2 },
                         team2: { name: 'Vitality.Bee', short: 'VIT', score: 1 },
+                        startTime: new Date().toISOString(),
                         date: '16 Fév - 18:00',
                         status: 'finished'
                     }
@@ -760,6 +809,7 @@
                 lflData.standings = [
                     { rank: 1, team: 'Karmine Corp', short: 'KC', wins: 12, losses: 2, points: 36 }
                 ];
+                lflData.lastUpdate = new Date().toISOString();
                 return false;
             }
         }
@@ -786,12 +836,18 @@
                         <div class="match-date">${match.date}</div>
                         <div class="match-teams">
                             <div class="team">
-                                <div class="team-name">${match.team1.short}</div>
+                                <div class="team-identity">
+                                    ${getTeamLogoHtml(match.team1.short)}
+                                    <div class="team-name">${match.team1.short}</div>
+                                </div>
                                 <div class="team-score ${winner1 ? 'winner' : winner2 ? 'loser' : ''}">${match.team1.score}</div>
                             </div>
                             <div class="versus">VS</div>
                             <div class="team">
-                                <div class="team-name">${match.team2.short}</div>
+                                <div class="team-identity">
+                                    ${getTeamLogoHtml(match.team2.short)}
+                                    <div class="team-name">${match.team2.short}</div>
+                                </div>
                                 <div class="team-score ${winner2 ? 'winner' : winner1 ? 'loser' : ''}">${match.team2.score}</div>
                             </div>
                         </div>
@@ -816,7 +872,7 @@
                         <div class="ranking-row">
                             <div class="rank rank-${team.rank}">${team.rank}</div>
                             <div class="team-info">
-                                <img src="${TEAM_LOGOS[team.short]}" alt="${team.short}" class="team-logo" onerror="this.outerHTML='<div class=team-logo-text>${team.short[0]}</div>'" />
+                                ${getTeamLogoHtml(team.short)}
                                 <div class="team-full-name">${team.team}</div>
                             </div>
                             <div class="stat">${team.wins}-${team.losses}</div>
@@ -848,12 +904,12 @@
                                 <div class="history-card">
                                     <div class="history-teams">
                                         <div class="history-team">
-                                            <img src="${TEAM_LOGOS[match.team1]}" alt="${match.team1}" class="team-logo" onerror="this.outerHTML='<div class=team-logo-text>${match.team1[0]}</div>'" />
+                                            ${getTeamLogoHtml(match.team1)}
                                             <div class="team-full-name">${match.team1}</div>
                                         </div>
                                         <div class="history-score">${match.score1} - ${match.score2}</div>
                                         <div class="history-team right">
-                                            <img src="${TEAM_LOGOS[match.team2]}" alt="${match.team2}" class="team-logo" onerror="this.outerHTML='<div class=team-logo-text>${match.team2[0]}</div>'" />
+                                            ${getTeamLogoHtml(match.team2)}
                                             <div class="team-full-name">${match.team2}</div>
                                         </div>
                                     </div>
@@ -869,35 +925,36 @@
 
         function renderPatchnotes() {
             const container = document.getElementById('patchnotes-section');
+            const totalMatches = lflData.matches.length;
+            const finishedMatches = lflData.matches.filter(match => match.status === 'finished').length;
+            const liveMatches = lflData.matches.filter(match => match.status === 'live').length;
+            const rankingTeams = lflData.standings.length;
+            const patchDate = formatDateLabel(lflData.lastUpdate, 'Date inconnue');
+
             container.innerHTML = `
                 <div class="patchnote-hero">
-                    <div class="patchnote-version">v2.0</div>
-                    <div class="patchnote-date">16 Février 2026</div>
+                    <div class="patchnote-version">v2.1</div>
+                    <div class="patchnote-date">MAJ ${patchDate}</div>
                 </div>
                 <div class="update-card">
                     <span class="update-tag tag-new">Nouveau</span>
-                    <div class="update-title">🎨 Système de Thèmes</div>
-                    <div class="update-desc">Bleu, Noir, Blanc - Personnalisez à fond !</div>
-                </div>
-                <div class="update-card">
-                    <span class="update-tag tag-new">Nouveau</span>
-                    <div class="update-title">🔔 Notifications</div>
-                    <div class="update-desc">Alertes de matchs en direct (Android)</div>
+                    <div class="update-title">🖼️ Logos dans les résultats</div>
+                    <div class="update-desc">Les logos des clubs sont affichés à côté des noms dans l'onglet Résultats.</div>
                 </div>
                 <div class="update-card">
                     <span class="update-tag tag-improved">Amélioré</span>
-                    <div class="update-title">📊 Détails Pronostics</div>
-                    <div class="update-desc">Analyse complète H2H et stats</div>
+                    <div class="update-title">📅 Dates synchronisées</div>
+                    <div class="update-desc">${finishedMatches}/${totalMatches} matchs terminés | ${liveMatches} en direct.</div>
+                </div>
+                <div class="update-card">
+                    <span class="update-tag ${rankingTeams > 0 ? 'tag-improved' : 'tag-fixed'}">${rankingTeams > 0 ? 'Amélioré' : 'Corrigé'}</span>
+                    <div class="update-title">🏆 Classement auto</div>
+                    <div class="update-desc">${rankingTeams > 0 ? `${rankingTeams} équipes disponibles dans le classement.` : 'Aucune équipe classée trouvée, vérifie la source API.'}</div>
                 </div>
                 <div class="update-card">
                     <span class="update-tag tag-fixed">Corrigé</span>
-                    <div class="update-title">📱 Alignement Classement</div>
-                    <div class="update-desc">Parfait sur tous les écrans</div>
-                </div>
-                <div class="update-card">
-                    <span class="update-tag tag-new">Nouveau</span>
-                    <div class="update-title">🔄 Backend Auto</div>
-                    <div class="update-desc">Données auto toutes les 15min</div>
+                    <div class="update-title">🔄 Rafraîchissement global</div>
+                    <div class="update-desc">Les données se rechargent et les onglets visibles se mettent à jour automatiquement.</div>
                 </div>
             `;
         }
@@ -985,21 +1042,21 @@
             loadLFLData().then(() => {
                 setTimeout(() => {
                     this.style.transform = '';
-                    renderMatches();
-                    renderRanking();
+                    refreshVisibleSections();
                 }, 300);
             });
         });
 
         // Init
         loadLFLData().then(() => {
-            renderMatches();
-            renderRanking();
+            refreshVisibleSections();
         });
 
         // Auto-refresh
         setInterval(() => {
-            loadLFLData();
+            loadLFLData().then(() => {
+                refreshVisibleSections();
+            });
         }, 30000);
     </script>
 </body>
